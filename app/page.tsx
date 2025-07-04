@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Trophy, Zap, Target, Users, Calendar, Flame, Star, Code2, TrendingUp, Download, Play, Monitor, Smartphone, ArrowDown, CheckCircle } from 'lucide-react'
+import { Trophy, Zap, Target, Users, Flame, Star, Code2, TrendingUp, Download, Play, Monitor, Smartphone, ArrowDown, CheckCircle } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -192,8 +192,8 @@ export default function Home() {
                   </div>
                   <div className="flex items-center justify-between p-3 bg-secondary-background border-2 border-border shadow-shadow">
                     <div>
-                      <div className="font-bold text-sm">Beat Friend's Time</div>
-                      <div className="text-xs text-foreground/70">Beat Sarah's solution</div>
+                      <div className="font-bold text-sm">Beat Friend&apos;s Time</div>
+                      <div className="text-xs text-foreground/70">Beat Sarah&apos;s solution</div>
                     </div>
                     <div className="text-lg font-bold text-chart-1">300 XP</div>
                   </div>
@@ -291,7 +291,7 @@ export default function Home() {
                 <CardHeader className="bg-main text-main-foreground">
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <Target className="w-5 h-5" />
-                    TODAY'S CHALLENGE
+                    TODAY&apos;S CHALLENGE
                   </CardTitle>
                   <CardDescription className="text-main-foreground/80">
                     Complete to maintain your streak!
@@ -342,8 +342,8 @@ export default function Home() {
                     </div>
                     <div className="flex items-center justify-between p-4 bg-secondary-background border-2 border-border shadow-shadow">
                       <div>
-                        <h4 className="font-bold">Beat Friend's Time</h4>
-                        <p className="text-sm text-foreground/70">Beat Sarah's 45ms solution</p>
+                        <h4 className="font-bold">Beat Friend&apos;s Time</h4>
+                        <p className="text-sm text-foreground/70">Beat Sarah&apos;s 45ms solution</p>
                       </div>
                       <div className="text-right">
                         <div className="text-lg font-bold text-chart-1">300 XP</div>
