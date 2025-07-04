@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔥 YEETCODE
 
-## Getting Started
+**The Ultimate Competitive LeetCode Companion**
 
-First, run the development server:
+Transform your coding practice from boring solo grind into an engaging social competition! Yeetcode brings gamification, real-time leaderboards, and friendly rivalry to your LeetCode journey.
+
+## ✨ Features
+
+### 🏆 **COMPETITIVE GAMEPLAY**
+- **Real-time Leaderboards** - Compete with friends and climb the ranks
+- **XP & Ranking System** - Earn points and unlock new ranks (Bronze → Silver → Gold → Diamond)
+- **Friend Challenges** - Challenge your coding buddies directly
+
+### 🎯 **DAILY ENGAGEMENT**
+- **Daily Challenges** - Fresh problems every day to keep you sharp
+- **Streak Tracking** - Build consistency with daily coding streaks
+- **Bounty System** - Earn bonus XP for completing special challenges
+
+### 📊 **PROGRESS TRACKING**
+- **Comprehensive Stats** - Track problems solved, XP earned, and time spent
+- **Activity Feed** - See what your friends are working on in real-time
+- **Achievement System** - Unlock badges and rewards for milestones
+
+### 🎨 **NEOBRUTALIST DESIGN**
+- **Bold & Unapologetic** - Sharp edges, strong shadows, high contrast
+- **Montserrat Typography** - Clean, modern font hierarchy
+- **Vibrant Color Palette** - Eye-catching accent colors that pop
+
+## 🚀 Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/yeetcode-website.git
+cd yeetcode-website
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open your browser
+open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS with custom neobrutalist theme
+- **Components**: Radix UI + shadcn/ui component library
+- **Typography**: Montserrat + Geist fonts
+- **Icons**: Lucide React
+- **Language**: TypeScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎨 Design System
 
-## Learn More
+Our neobrutalist design philosophy emphasizes:
 
-To learn more about Next.js, take a look at the following resources:
+- **Bold borders** (2-4px) on all interactive elements
+- **Strong shadows** with 4px offset for depth
+- **High contrast** color combinations for accessibility
+- **Sharp, geometric** layouts with minimal rounded corners
+- **Heavy typography** with clear visual hierarchy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+yeetcode-website/
+├── app/
+│   ├── globals.css          # Global styles & CSS variables
+│   ├── layout.tsx           # Root layout with fonts
+│   └── page.tsx             # Main landing page
+├── components/
+│   └── ui/                  # shadcn/ui components
+├── lib/
+│   └── utils.ts             # Utility functions
+└── public/                  # Static assets
+```
 
-## Deploy on Vercel
+## 🎯 Core Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Hero Section** - Eye-catching intro with CTA buttons
+- **Feature Cards** - Highlighted benefits with colorful backgrounds
+- **Screenshot Gallery** - Visual previews of the app interface
+- **Download Section** - Platform-specific download options
+- **Dashboard Preview** - Interactive demo of the main interface
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
+
+## 🌟 Contributing
+
+We love contributions! Whether it's:
+
+- 🐛 Bug fixes
+- ✨ New features
+- 📝 Documentation improvements
+- 🎨 Design enhancements
+
+Feel free to open an issue or submit a pull request!
+
+## 📄 License
+
+MIT License - feel free to use this project for your own coding competition apps!
+
+## 🤝 Connect
+
+Made with ❤️ for the competitive coding community.
+
+**Let's make LeetCode practice fun again! 🎉**
+
+---
+
+*Built with Next.js • Styled with Tailwind • Designed with Neobrutalism*
