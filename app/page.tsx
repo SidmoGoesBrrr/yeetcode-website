@@ -191,7 +191,7 @@ export default function Home() {
                     <div className="text-lg font-bold text-chart-1">500 XP</div>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-secondary-background border-2 border-border shadow-shadow">
-                    <div>
+    <div>
                       <div className="font-bold text-sm">Beat Friend&apos;s Time</div>
                       <div className="text-xs text-foreground/70">Beat Sarah&apos;s solution</div>
                     </div>
