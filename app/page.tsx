@@ -81,5 +81,5 @@ export default function Home() {
         © 2025 YeetCode. Built for competitive coders.
       </footer>
     </div>
-  )
+  );
 }
