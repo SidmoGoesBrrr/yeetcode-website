@@ -5,29 +5,29 @@
 
 :root {
   /* YeetCode Design System */
-  --yeetcode-blue: #3B82F6;
-  --yeetcode-blue-dark: #1D4ED8;
-  --yeetcode-blue-light: #60A5FA;
-  --yeetcode-yellow: #F59E0B;
-  --yeetcode-yellow-dark: #D97706;
-  --yeetcode-yellow-light: #FBBF24;
-  --yeetcode-green: #10B981;
+  --yeetcode-blue: #3b82f6;
+  --yeetcode-blue-dark: #1d4ed8;
+  --yeetcode-blue-light: #60a5fa;
+  --yeetcode-yellow: #f59e0b;
+  --yeetcode-yellow-dark: #d97706;
+  --yeetcode-yellow-light: #fbbf24;
+  --yeetcode-green: #10b981;
   --yeetcode-green-dark: #059669;
-  --yeetcode-orange: #F97316;
-  --yeetcode-orange-dark: #EA580C;
-  --yeetcode-red: #EF4444;
-  --yeetcode-red-dark: #DC2626;
+  --yeetcode-orange: #f97316;
+  --yeetcode-orange-dark: #ea580c;
+  --yeetcode-red: #ef4444;
+  --yeetcode-red-dark: #dc2626;
 
-  --bg-primary: #FEF3C7;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F3F4F6;
+  --bg-primary: #fef3c7;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f3f4f6;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-muted: #9CA3AF;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
 
   --border-primary: #000000;
-  --border-secondary: #D1D5DB;
+  --border-secondary: #d1d5db;
 
   /* Map existing tokens */
   --background: var(--bg-primary);
@@ -48,10 +48,10 @@
 }
 
 .dark {
-  --background: #1F2937;
+  --background: #1f2937;
   --secondary-background: #111827;
-  --foreground: #F9FAFB;
-  --main-foreground: #FFFFFF;
+  --foreground: #f9fafb;
+  --main-foreground: #ffffff;
   --main: var(--yeetcode-blue-light);
   --border: var(--border-primary);
   --ring: var(--border-primary);
@@ -88,22 +88,32 @@
   --font-weight-base: 500;
   --font-weight-heading: 800;
   --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-family-mono: var(--font-jetbrains), ui-monospace, 'Courier New', monospace;
+  --font-family-mono:
+    var(--font-jetbrains), ui-monospace, "Courier New", monospace;
 }
-  
+
 @layer base {
   body {
     @apply text-foreground font-base bg-background font-sans;
   }
 
-  h1, h2, h3, h4, h5, h6{
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading;
   }
 }
 
 @layer components {
   .hero-section {
-    background: linear-gradient(135deg, var(--yeetcode-blue) 0%, var(--yeetcode-blue-dark) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--yeetcode-blue) 0%,
+      var(--yeetcode-blue-dark) 100%
+    );
     color: white;
     text-align: center;
     padding: 4rem 2rem;
@@ -138,10 +148,11 @@
 
   .feature-card {
     background: var(--bg-secondary);
-    border: 4px solid var(--border-primary);
+    border: 6px solid var(--border-primary);
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
+    color: var(--text-black);
     transition: transform 0.2s ease;
   }
 
