@@ -152,7 +152,7 @@
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
-    color: #000;
+    color: var(--text-black);
     transition: transform 0.2s ease;
   }
 
