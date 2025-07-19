@@ -1,6 +1,12 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Trophy, Sword, CalendarDays, Star, Download } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Trophy,
+  Sword,
+  CalendarDays,
+  BadgeDollarSign,
+  Download,
+} from "lucide-react"
 
 export default function Home() {
   return (
@@ -16,9 +22,12 @@ export default function Home() {
       </header>
 
       <section className="hero-section">
-        <h2 className="hero-title">Transform Your LeetCode Journey into an Epic Competition</h2>
+        <h2 className="hero-title">
+          Transform Your LeetCode Journey into an Epic Competition
+        </h2>
         <p className="hero-subtitle max-w-2xl mx-auto">
-          Challenge friends, climb leaderboards and earn XP – all while keeping your existing progress.
+          Challenge friends, climb leaderboards and earn XP – all while keeping
+          your existing progress.
         </p>
         <Button size="lg" className="cta-button inline-flex items-center">
           <Download className="w-5 h-5 mr-2" /> Download YeetCode
@@ -47,7 +56,8 @@ export default function Home() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              Challenge any friend and let YeetCode detect the winner automatically.
+              Challenge any friend and let YeetCode detect the winner
+              automatically.
             </CardContent>
           </Card>
 
@@ -59,14 +69,15 @@ export default function Home() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              Curated problems and streak tracking that actually keeps you coding.
+              Curated problems and streak tracking that actually keeps you
+              coding.
             </CardContent>
           </Card>
 
           <Card className="feature-card">
             <CardHeader>
               <CardTitle className="flex items-center justify-center gap-2">
-                <Star className="feature-icon" />
+                <BadgeDollarSign className="feature-icon" />
                 Active Bounties
               </CardTitle>
             </CardHeader>
@@ -81,5 +92,5 @@ export default function Home() {
         © 2025 YeetCode. Built for competitive coders.
       </footer>
     </div>
-  );
+  )
 }
