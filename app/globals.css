@@ -148,7 +148,7 @@
 
   .feature-card {
     background: var(--bg-secondary);
-    border: 6px solid #000;
+    border: 6px solid var(--border-primary);
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
