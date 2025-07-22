@@ -33,7 +33,7 @@ const TodaysChallenge = ({ userData, dailyData, onDailyComplete }) => {
 
   if (dailyData.loading) {
     return (
-      <div className="bg-yellow-100 border-4 border-black rounded-xl overflow-hidden shadow-lg">
+      <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden">
         <div className="bg-blue-500 px-6 py-4 border-b-4 border-black">
           <div className="flex items-center gap-2">
             <span className="text-white text-lg">🎯</span>
@@ -51,7 +51,7 @@ const TodaysChallenge = ({ userData, dailyData, onDailyComplete }) => {
 
   if (dailyData.error || !dailyData.todaysProblem) {
     return (
-      <div className="bg-yellow-100 border-4 border-black rounded-xl overflow-hidden shadow-lg">
+      <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden">
         <div className="bg-blue-500 px-6 py-4 border-b-4 border-black">
           <div className="flex items-center gap-2">
             <span className="text-white text-lg">🎯</span>
@@ -74,7 +74,7 @@ const TodaysChallenge = ({ userData, dailyData, onDailyComplete }) => {
     stripHtmlTags(problem.content).substring(0, 200) + "..."
 
   return (
-    <div className="bg-yellow-100 border-4 border-black rounded-xl overflow-hidden shadow-lg">
+    <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden">
       <div className="bg-blue-500 px-6 py-4 border-b-4 border-black">
         <div className="flex items-center gap-2">
           <span className="text-white text-lg">🎯</span>
@@ -120,7 +120,7 @@ const TodaysChallenge = ({ userData, dailyData, onDailyComplete }) => {
           <div className="flex-shrink-0">
             {dailyData.dailyComplete ? (
               <button
-                className="bg-gray-500 text-white px-6 py-2 rounded-lg border-2 border-black font-bold flex items-center gap-2 cursor-not-allowed"
+                className="btn-3d bg-gray-500 text-white px-6 py-2 rounded-lg border-2 border-black font-bold flex items-center gap-2 cursor-not-allowed opacity-75"
                 disabled
               >
                 <span>✅</span>

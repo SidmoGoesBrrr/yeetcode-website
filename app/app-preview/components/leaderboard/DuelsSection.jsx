@@ -568,7 +568,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           {/* Disabled COMPLETED button */}
           <button
             disabled={true}
-            className="w-full bg-gray-300 text-gray-600 px-4 py-2 rounded font-bold border-2 border-gray-400 cursor-not-allowed"
+            className="btn-3d w-full bg-gray-300 text-gray-600 px-4 py-2 rounded font-bold border-2 border-gray-400 cursor-not-allowed opacity-75"
           >
             ✅ COMPLETED
           </button>

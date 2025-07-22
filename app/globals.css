@@ -5,29 +5,29 @@
 
 :root {
   /* YeetCode Design System */
-  --yeetcode-blue: #3B82F6;
-  --yeetcode-blue-dark: #1D4ED8;
-  --yeetcode-blue-light: #60A5FA;
-  --yeetcode-yellow: #F59E0B;
-  --yeetcode-yellow-dark: #D97706;
-  --yeetcode-yellow-light: #FBBF24;
-  --yeetcode-green: #10B981;
+  --yeetcode-blue: #3b82f6;
+  --yeetcode-blue-dark: #1d4ed8;
+  --yeetcode-blue-light: #60a5fa;
+  --yeetcode-yellow: #fde047;
+  --yeetcode-yellow-dark: #facc15;
+  --yeetcode-yellow-light: #fef08a;
+  --yeetcode-green: #10b981;
   --yeetcode-green-dark: #059669;
-  --yeetcode-orange: #F97316;
-  --yeetcode-orange-dark: #EA580C;
-  --yeetcode-red: #EF4444;
-  --yeetcode-red-dark: #DC2626;
+  --yeetcode-orange: #f97316;
+  --yeetcode-orange-dark: #ea580c;
+  --yeetcode-red: #ef4444;
+  --yeetcode-red-dark: #dc2626;
 
-  --bg-primary: #FEF3C7;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F3F4F6;
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f3f4f6;
 
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
-  --text-muted: #9CA3AF;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
 
   --border-primary: #000000;
-  --border-secondary: #D1D5DB;
+  --border-secondary: #e5e7eb;
 
   /* Map existing tokens */
   --background: var(--bg-primary);
@@ -48,10 +48,10 @@
 }
 
 .dark {
-  --background: #1F2937;
+  --background: #1f2937;
   --secondary-background: #111827;
-  --foreground: #F9FAFB;
-  --main-foreground: #FFFFFF;
+  --foreground: #f9fafb;
+  --main-foreground: #ffffff;
   --main: var(--yeetcode-blue-light);
   --border: var(--border-primary);
   --ring: var(--border-primary);
@@ -88,65 +88,205 @@
   --font-weight-base: 500;
   --font-weight-heading: 800;
   --font-family-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-family-mono: var(--font-jetbrains), ui-monospace, 'Courier New', monospace;
+  --font-family-mono:
+    var(--font-jetbrains), ui-monospace, "Courier New", monospace;
 }
-  
+
 @layer base {
   body {
     @apply text-foreground font-base bg-background font-sans;
   }
 
-  h1, h2, h3, h4, h5, h6{
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading;
   }
 }
 
 @layer components {
   .hero-section {
-    background: linear-gradient(135deg, var(--yeetcode-blue) 0%, var(--yeetcode-blue-dark) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0, 0, 0, 0.03) 10px,
+      rgba(0, 0, 0, 0.03) 20px
+    );
+    transform: rotate(45deg);
+    pointer-events: none;
+  }
+
+  .carousel-slide {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .slide-in-right {
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .slide-in-left {
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  /* Responsive utilities */
+  @media (max-width: 640px) {
+    .hero-section {
+      padding: 3rem 1rem;
+    }
+  }
+
+  /* 3D Button Effects */
+  .btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .btn--primary {
+    background-color: #16a34a;
     color: white;
-    text-align: center;
-    padding: 4rem 2rem;
   }
 
-  .hero-title {
-    @apply text-4xl md:text-6xl font-extrabold mb-4;
-    text-shadow: 2px 2px 0 var(--border-primary);
+  .btn--primary:hover {
+    background-color: #15803d;
   }
 
-  .hero-subtitle {
-    @apply text-lg md:text-xl mb-8;
-    opacity: 0.9;
+  /* Enhanced 3D Button Effects */
+  .btn-3d {
+    position: relative;
+    box-shadow: 6px 6px 0 #000;
+    transition: all 0.15s ease-in-out;
+    transform: translate(0, 0);
   }
 
-  .cta-button {
-    background: var(--yeetcode-yellow);
-    color: var(--text-primary);
-    border: 3px solid var(--border-primary);
-    border-radius: 12px;
-    padding: 1rem 2rem;
-    font-weight: 700;
-    font-size: 1.125rem;
-    box-shadow: 0 6px 0 var(--yeetcode-yellow-dark);
-    transition: all 0.2s ease;
+  .btn-3d:active {
+    transform: translate(6px, 6px);
+    box-shadow: none;
   }
 
-  .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 0 var(--yeetcode-yellow-dark);
+  .btn-3d:hover {
+    box-shadow: 8px 8px 0 #000;
+    transform: translate(-2px, -2px);
   }
 
-  .feature-card {
-    background: var(--bg-secondary);
-    border: 4px solid var(--border-primary);
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    transition: transform 0.2s ease;
+  .btn-3d:active:hover {
+    transform: translate(6px, 6px);
+    box-shadow: none;
   }
 
-  .feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  /* Additional shadow variations */
+  .shadow-3d-sm {
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .shadow-3d-md {
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .shadow-3d-lg {
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  /* Button press animation */
+  .btn-press {
+    transition: all 0.1s ease-in-out;
+  }
+
+  .btn-press:active {
+    transform: scale(0.98);
+  }
+
+  /* Panel 3D effects */
+  .panel-3d {
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .panel-3d:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Retro game-like button effects */
+  .btn-retro {
+    border: 3px solid #000;
+    box-shadow:
+      inset 2px 2px 0 rgba(255, 255, 255, 0.3),
+      inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+      4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .btn-retro:active {
+    box-shadow:
+      inset 2px 2px 0 rgba(0, 0, 0, 0.3),
+      inset -2px -2px 0 rgba(255, 255, 255, 0.3);
+    transform: translate(2px, 2px);
+  }
+
+  /* Custom Scrollbar Styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #60a5fa;
+    border-radius: 4px;
+    border: 1px solid #000;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+  }
+
+  /* Firefox scrollbar styling */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #60a5fa #f1f5f9;
   }
 }
