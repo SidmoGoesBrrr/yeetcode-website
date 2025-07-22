@@ -376,14 +376,14 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
             <button
               onClick={() => handleAcceptDuel(duel.duelId)}
               disabled={actionLoading[`accept_${duel.duelId}`]}
-              className="flex-1 bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-bold btn-3d disabled:opacity-50 border-2 border-black"
+              className="flex-1 btn-3d bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-bold disabled:opacity-50 border-2 border-black"
             >
               {actionLoading[`accept_${duel.duelId}`] ? "⏳" : "✅"} Accept
             </button>
             <button
               onClick={() => handleRejectDuel(duel.duelId)}
               disabled={actionLoading[`reject_${duel.duelId}`]}
-              className="flex-1 bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-xs font-bold btn-3d disabled:opacity-50 border-2 border-black"
+              className="flex-1 btn-3d bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-xs font-bold disabled:opacity-50 border-2 border-black"
             >
               {actionLoading[`reject_${duel.duelId}`] ? "⏳" : "❌"} Reject
             </button>
@@ -471,7 +471,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           <button
             onClick={() => handleStartDuel(duel.duelId, duel.problemSlug)}
             disabled={actionLoading[`start_${duel.duelId}`]}
-            className="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-bold btn-3d disabled:opacity-50 border-2 border-black"
+            className="w-full btn-3d bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-bold disabled:opacity-50 border-2 border-black"
           >
             {actionLoading[`start_${duel.duelId}`]
               ? "⏳ Starting..."
@@ -484,7 +484,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           <div className="space-y-2">
             <button
               onClick={() => handleSolveNow(duel.problemSlug)}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-bold btn-3d"
+              className="w-full btn-3d bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold border-2 border-black"
             >
               💻 Solve Now
             </button>
@@ -656,7 +656,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
 
   if (loading) {
     return (
-      <div className="bg-yellow-100 border-4 border-black rounded-xl overflow-hidden shadow-lg">
+      <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden">
         <div className="bg-blue-500 px-6 py-4 border-b-4 border-black">
           <div className="flex items-center gap-2">
             <span className="text-white text-lg">⚔️</span>
@@ -677,7 +677,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
 
   return (
     <div
-      className="bg-yellow-100 border-4 border-black rounded-xl overflow-hidden shadow-lg relative"
+      className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden relative"
       style={{ height: "380px" }}
     >
       {/* Win message overlay */}
@@ -765,7 +765,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
             <button
               onClick={handleSendChallenge}
               disabled={actionLoading.createDuel}
-              className="w-full mt-3 bg-blue-200 hover:bg-blue-400 text-black px-4 py-2 rounded-lg border-2 border-black font-bold btn-3d disabled:opacity-50"
+              className="w-full mt-3 btn-3d bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg border-2 border-black font-bold disabled:opacity-50"
             >
               {actionLoading.createDuel ? "⏳ Sending..." : "Send Challenge"}
             </button>

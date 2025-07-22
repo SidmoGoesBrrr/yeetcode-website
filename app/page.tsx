@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client"
 import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
@@ -12,29 +11,73 @@ import {
   ChevronRight,
 } from "lucide-react"
 import dynamic from "next/dynamic"
+import type { ComponentType } from "react"
+
+interface LeaderboardUser {
+  name: string
+  leetUsername: string
+  username: string
+  easy: number
+  medium: number
+  hard: number
+  total: number
+  xp: number
+  rank: number
+}
+
+interface UserData {
+  name: string
+  leetUsername: string
+}
+
+interface DailyData {
+  dailyComplete: boolean
+  streak: number
+  todaysProblem: {
+    title: string
+    titleSlug: string
+    difficulty: string
+    content: string
+    topicTags: Array<{ name: string }>
+  }
+  error: null | string
+  loading: boolean
+}
 
 const LeaderboardCard = dynamic(
   () => import("./app-preview/components/leaderboard/FriendsLeaderboard"),
   { ssr: false }
-)
+) as ComponentType<{
+  leaderboard: LeaderboardUser[]
+  userData: UserData
+  notifications: Array<{ id?: string | number; type: string; message: string }>
+}>
+
 const DuelsCard = dynamic(
   () => import("./app-preview/components/leaderboard/DuelsSection"),
   { ssr: false }
-)
+) as ComponentType<{ leaderboard: LeaderboardUser[]; userData: UserData }>
+
 const DailyCard = dynamic(
   () => import("./app-preview/components/leaderboard/TodaysChallenge"),
   { ssr: false }
-)
+) as ComponentType<{
+  userData: UserData
+  dailyData: DailyData
+  onDailyComplete: () => void
+}>
+
 const BountiesCard = dynamic(
   () => import("./app-preview/components/leaderboard/ActiveBounties"),
   { ssr: false }
-)
+) as ComponentType<{ userData: UserData }>
 
-const userData = { name: "Alex", leetUsername: "sample_user" }
-const leaderboard = [
+const userData: UserData = { name: "Alex", leetUsername: "sample_user" }
+const leaderboard: LeaderboardUser[] = [
   {
     name: "Alex",
     leetUsername: "sample_user",
+    username: "sample_user",
     easy: 143,
     medium: 42,
     hard: 7,
@@ -45,6 +88,7 @@ const leaderboard = [
   {
     name: "Sam",
     leetUsername: "samwise",
+    username: "samwise",
     easy: 118,
     medium: 49,
     hard: 5,
@@ -55,6 +99,7 @@ const leaderboard = [
   {
     name: "Taylor",
     leetUsername: "taylor123",
+    username: "taylor123",
     easy: 112,
     medium: 55,
     hard: 19,
@@ -63,7 +108,7 @@ const leaderboard = [
     rank: 3,
   },
 ]
-const dailyData = {
+const dailyData: DailyData = {
   dailyComplete: false,
   streak: 3,
   todaysProblem: {
@@ -124,7 +169,7 @@ export default function Home() {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(0) // -1 for left, 1 for right
   const [isPaused, setIsPaused] = useState(false)
-  const timeoutRef = useRef()
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Auto-advance carousel
   useEffect(() => {
@@ -134,21 +179,23 @@ export default function Home() {
         setCurrent((prev) => (prev + 1) % features.length)
       }, 10000)
     }
-    return () => clearTimeout(timeoutRef.current)
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
   }, [current, isPaused])
 
-  const goTo = (idx) => {
-    clearTimeout(timeoutRef.current)
+  const goTo = (idx: number) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
     setDirection(idx > current ? 1 : -1)
     setCurrent(idx)
   }
   const prev = () => {
-    clearTimeout(timeoutRef.current)
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
     setDirection(-1)
     setCurrent((prev) => (prev - 1 + features.length) % features.length)
   }
   const next = () => {
-    clearTimeout(timeoutRef.current)
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
     setDirection(1)
     setCurrent((prev) => (prev + 1) % features.length)
   }
@@ -356,7 +403,7 @@ export default function Home() {
       <section className="py-12 md:py-20 bg-white border-b-4 border-black">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-black">
-            Why We're Building YeetCode
+            Why We&apos;re Building YeetCode
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="panel-3d bg-yellow-50 border-3 border-black rounded-xl p-6 text-center">
@@ -366,7 +413,8 @@ export default function Home() {
               </h3>
               <p className="text-gray-700">
                 We all know we should practice, but opening LeetCode feels like
-                homework. There's no motivation when you're grinding solo.
+                homework. There&apos;s no motivation when you&apos;re grinding
+                solo.
               </p>
             </div>
 
@@ -376,7 +424,7 @@ export default function Home() {
                 Competition Makes It Fun
               </h3>
               <p className="text-gray-700">
-                Everything's better with friends. Imagine Duolingo meets
+                Everything&apos;s better with friends. Imagine Duolingo meets
                 LeetCode - daily streaks, friendly battles, and bragging rights.
               </p>
             </div>
@@ -387,7 +435,7 @@ export default function Home() {
                 Built By Devs, For Devs
               </h3>
               <p className="text-gray-700">
-                We're software engineers who struggled with consistency.
+                We&apos;re software engineers who struggled with consistency.
                 YeetCode is the app we wished existed during our interview prep.
               </p>
             </div>
@@ -456,7 +504,7 @@ export default function Home() {
       <section className="py-12 md:py-20 bg-white border-b-4 border-black">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-black">
-            Questions? We've Got Answers
+            Questions? We&apos;ve Got Answers
           </h2>
           <div className="space-y-6">
             <div className="panel-3d bg-yellow-50 border-3 border-black rounded-xl p-6">
@@ -484,9 +532,9 @@ export default function Home() {
                 When will YeetCode launch?
               </h3>
               <p className="text-gray-700">
-                We're launching in early 2025! Join the early access list to be
-                the first to know. Beta testers get lifetime premium features
-                (when we add them).
+                We&apos;re launching in early 2025! Join the early access list
+                to be the first to know. Beta testers get lifetime premium
+                features (when we add them).
               </p>
             </div>
             <div className="panel-3d bg-yellow-50 border-3 border-black rounded-xl p-6">

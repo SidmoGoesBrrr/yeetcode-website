@@ -182,7 +182,7 @@ const ActiveBounties = ({ userData }) => {
 
   return (
     <div
-      className="bg-yellow-100 border-4 border-black rounded-xl overflow-hidden shadow-lg flex flex-col"
+      className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden flex flex-col"
       style={{ height: "400px" }}
     >
       <div className="bg-blue-500 px-6 py-4 border-b-4 border-black flex-shrink-0">

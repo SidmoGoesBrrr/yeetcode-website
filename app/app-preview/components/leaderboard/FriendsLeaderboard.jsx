@@ -187,20 +187,20 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
             {/* Tabs (inline with title) */}
             <div className="flex gap-2 ml-4">
               <button
-                className={`btn-3d shadow-md px-3 py-1 rounded-lg font-bold border-2 border-b-0 border-white focus:outline-none transition-colors text-sm ${
+                className={`btn-3d px-3 py-1 rounded-lg font-bold border-2 border-black focus:outline-none transition-colors text-sm ${
                   activeTab === "friends"
-                    ? "bg-yellow-100 text-black"
-                    : "bg-blue-200 text-black hover:bg-yellow-200"
+                    ? "bg-yellow-300 text-black"
+                    : "bg-white text-black hover:bg-yellow-100"
                 }`}
                 onClick={() => setActiveTab("friends")}
               >
                 Friends
               </button>
               <button
-                className={`btn-3d shadow-md px-3 py-1 rounded-lg font-bold border-2 border-b-0 border-white focus:outline-none transition-colors text-sm ${
+                className={`btn-3d px-3 py-1 rounded-lg font-bold border-2 border-black focus:outline-none transition-colors text-sm ${
                   activeTab === "university"
-                    ? "bg-yellow-100 text-black"
-                    : "bg-blue-200 text-black0 hover:bg-yellow-200"
+                    ? "bg-yellow-300 text-black"
+                    : "bg-white text-black hover:bg-yellow-100"
                 }`}
                 onClick={() => setActiveTab("university")}
               >
