@@ -149,7 +149,10 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
       console.error("Error accepting duel:", err)
       addNotification("Failed to accept duel", "error")
     } finally {
-      setActionLoading({ [`accept_${duelId}`]: false })
+      // Clear the loading state after a short delay to prevent UI flicker
+      setTimeout(() => {
+        setActionLoading({})
+      }, 100)
     }
   }
 
@@ -167,7 +170,10 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
       console.error("Error rejecting duel:", err)
       addNotification("Failed to reject duel", "error")
     } finally {
-      setActionLoading({ [`reject_${duelId}`]: false })
+      // Clear the loading state after a short delay to prevent UI flicker
+      setTimeout(() => {
+        setActionLoading({})
+      }, 100)
     }
   }
 
@@ -372,17 +378,23 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
         </div>
 
         {!isChallenger && (
-          <div className="flex gap-2">
+          <div className="flex gap-3 mt-2">
             <button
               onClick={() => handleAcceptDuel(duel.duelId)}
-              disabled={actionLoading[`accept_${duel.duelId}`]}
+              disabled={
+                actionLoading[`accept_${duel.duelId}`] ||
+                actionLoading[`reject_${duel.duelId}`]
+              }
               className="flex-1 btn-3d bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-bold disabled:opacity-50 border-2 border-black"
             >
               {actionLoading[`accept_${duel.duelId}`] ? "⏳" : "✅"} Accept
             </button>
             <button
               onClick={() => handleRejectDuel(duel.duelId)}
-              disabled={actionLoading[`reject_${duel.duelId}`]}
+              disabled={
+                actionLoading[`reject_${duel.duelId}`] ||
+                actionLoading[`accept_${duel.duelId}`]
+              }
               className="flex-1 btn-3d bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-xs font-bold disabled:opacity-50 border-2 border-black"
             >
               {actionLoading[`reject_${duel.duelId}`] ? "⏳" : "❌"} Reject

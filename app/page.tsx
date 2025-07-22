@@ -532,9 +532,9 @@ export default function Home() {
                 When will YeetCode launch?
               </h3>
               <p className="text-gray-700">
-                We&apos;re launching in early 2025! Join the early access list
-                to be the first to know. Beta testers get lifetime premium
-                features (when we add them).
+                We&apos;re launching in July 2025! Join the early access list to
+                be the first to know. Beta testers get lifetime premium features
+                (when we add them).
               </p>
             </div>
             <div className="panel-3d bg-yellow-50 border-3 border-black rounded-xl p-6">
