@@ -12,6 +12,7 @@ import {
 } from "lucide-react"
 import dynamic from "next/dynamic"
 import type { ComponentType } from "react"
+import ContactSection from "@/app/components/ContactSection"
 
 interface LeaderboardUser {
   name: string
@@ -535,6 +536,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ContactSection />
+
       {/* Final CTA */}
       <section className="py-16 md:py-24 border-t-4 border-black bg-gradient-to-t from-yellow-400 to-yellow-300">
         <div className="max-w-3xl mx-auto text-center px-4">
@@ -577,7 +580,7 @@ export default function Home() {
               </Button>
             </div>
             <p className="text-sm text-black/70">
-              Limited spots available • First 1000 users get lifetime perks
+              Limited spots available • First 500 users get lifetime perks
             </p>
           </div>
         </div>
