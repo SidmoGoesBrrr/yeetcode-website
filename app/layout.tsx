@@ -17,6 +17,21 @@ export const metadata: Metadata = {
   title: "Yeetcode - Competitive LeetCode Companion",
   description:
     "Make coding practice engaging and social with real-time leaderboards, daily challenges, and friendly competition.",
+  openGraph: {
+    title: "Yeetcode - Competitive LeetCode Companion",
+    description:
+      "Make coding practice engaging and social with real-time leaderboards, daily challenges, and friendly competition.",
+    url: "https://yeetcode.xyz",
+    type: "website",
+    images: [
+      {
+        url: "/cover.png",
+        width: 1200,
+        height: 630,
+        alt: "Yeetcode Leaderboard Preview",
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
