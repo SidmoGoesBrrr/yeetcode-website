@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 // Remove all API service imports - we're using hardcoded data only
 
 const DuelsSection = ({ leaderboard = [], userData }) => {
@@ -61,9 +61,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
   const [showWinMessage, setShowWinMessage] = useState(false)
   const [lastWinData, setLastWinData] = useState(null)
 
-  // Refs for polling intervals and backoff tracking
-  const pollingIntervals = useRef({})
-  const pollingBackoff = useRef({}) // Track backoff intervals for each duel
+  // No polling needed for static preview data
 
   // Filter out current user from friends list (case-insensitive)
   const availableFriends = leaderboard.filter(
@@ -177,138 +175,50 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
     }
   }
 
-  // Handle starting a duel (revealing problem and starting timer)
-  const handleStartDuel = async (duelId, problemSlug) => {
-    // Make button pressable but non-functional for demo
+  // Handle starting a duel (just visual feedback for demo)
+  const handleStartDuel = async (duelId) => {
     setActionLoading({ [`start_${duelId}`]: true })
 
-    // Show some visual feedback
     setTimeout(() => {
       setActionLoading({})
-      // Button pressed but no real action taken
+      setDuelStarts((prev) => ({ ...prev, [duelId]: true }))
+      addNotification("Duel started! Good luck! 🚀", "success")
+
+      // For demo, simulate completion after a delay
+      simulateDuelCompletion(duelId)
     }, 1000)
   }
 
-  // Start polling for LeetCode submissions using real API
-  const startSubmissionPolling = (duelId, problemSlug, startTime) => {
-    if (pollingIntervals.current[duelId]) {
-      clearInterval(pollingIntervals.current[duelId])
-    }
+  // Simplified function to simulate duel completion (no actual polling)
+  const simulateDuelCompletion = (duelId) => {
+    // For demo purposes, simulate that the user completed the duel
+    setTimeout(() => {
+      const randomTime = Math.floor(Math.random() * 600 + 180) * 1000 // 3-10 minutes
+      setDuels((prev) =>
+        prev.map((duel) =>
+          duel.duelId === duelId
+            ? {
+                ...duel,
+                challengerTime: randomTime,
+                status: "COMPLETED",
+                winner: userData.leetUsername,
+                xpAwarded: 100,
+                completed: true,
+              }
+            : duel
+        )
+      )
 
-    // Initialize backoff for this duel
-    pollingBackoff.current[duelId] = {
-      interval: 1000, // Start with 1 second
-      maxInterval: 30000, // Max 30 seconds
-      attempts: 0,
-    }
-
-    const pollForSubmission = async () => {
-      try {
-        // In a real app, you would check for a submission using a LeetCode API
-        // For static data, we'll simulate a submission
-        const submission = {
-          timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(), // Simulate a submission 5 minutes ago
-          problemSlug: problemSlug,
-          username: userData.leetUsername,
-        }
-
-        if (submission) {
-          // Found a submission! Record it
-          const elapsedMs = new Date(submission.timestamp).getTime() - startTime
-
-          // In a real app, you would record the submission using an API
-          // For static data, we'll just update the duel
-          setDuels((prev) =>
-            prev.map((duel) =>
-              duel.duelId === duelId
-                ? {
-                    ...duel,
-                    challengerTime: elapsedMs,
-                    status: "COMPLETED",
-                    winner: userData.leetUsername,
-                    xpAwarded: 100, // Placeholder XP
-                    completed: true,
-                  }
-                : duel
-            )
-          )
-
-          // Stop polling
-          clearInterval(pollingIntervals.current[duelId])
-          delete pollingIntervals.current[duelId]
-          delete pollingBackoff.current[duelId]
-
-          // Reload duels to get updated state
-          // setDuels(prev => prev.map(duel => ({ ...duel, completed: duel.status === 'COMPLETED' }))); // This line is no longer needed
-
-          // Check if this submission completed the duel
-          // In a real app, you would fetch the updated duel from an API
-          // For static data, we'll just find it
-          const updatedDuel = duels.find((duel) => duel.duelId === duelId)
-          if (updatedDuel && updatedDuel.status === "COMPLETED") {
-            const isWinner = updatedDuel.winner === userData.leetUsername
-            if (isWinner) {
-              setLastWinData({
-                duelId,
-                problemTitle: updatedDuel.problemTitle,
-                xpAwarded: updatedDuel.xpAwarded,
-                time: elapsedMs,
-              })
-              setShowWinMessage(true)
-              setTimeout(() => setShowWinMessage(false), 5000) // Hide after 5 seconds
-            }
-          }
-
-          addNotification(
-            "Submission detected and recorded! Waiting for opponent...",
-            "success"
-          )
-        } else {
-          // No submission found, increase backoff interval
-          const backoff = pollingBackoff.current[duelId]
-          if (backoff) {
-            backoff.attempts++
-            // Exponential backoff: 1s, 2s, 4s, 8s, 16s, 30s (max)
-            backoff.interval = Math.min(
-              1000 * Math.pow(2, Math.floor(backoff.attempts / 3)),
-              backoff.maxInterval
-            )
-
-            console.log(
-              `[DUEL] Polling backoff: ${backoff.interval}ms for duel ${duelId}`
-            )
-
-            // Schedule next poll with new interval
-            clearInterval(pollingIntervals.current[duelId])
-            pollingIntervals.current[duelId] = setTimeout(
-              pollForSubmission,
-              backoff.interval
-            )
-          }
-        }
-      } catch (error) {
-        console.error("Error checking submission:", error)
-        // On error, also increase backoff
-        const backoff = pollingBackoff.current[duelId]
-        if (backoff) {
-          backoff.attempts++
-          backoff.interval = Math.min(backoff.interval * 2, backoff.maxInterval)
-
-          // Schedule retry with backoff
-          clearInterval(pollingIntervals.current[duelId])
-          pollingIntervals.current[duelId] = setTimeout(
-            pollForSubmission,
-            backoff.interval
-          )
-        }
-      }
-    }
-
-    // Start initial poll
-    pollingIntervals.current[duelId] = setTimeout(
-      pollForSubmission,
-      pollingBackoff.current[duelId].interval
-    )
+      addNotification("Duel completed! You won! 🎉", "success")
+      setLastWinData({
+        duelId,
+        problemTitle: "Demo Problem",
+        xpAwarded: 100,
+        time: randomTime,
+      })
+      setShowWinMessage(true)
+      setTimeout(() => setShowWinMessage(false), 5000)
+    }, 3000) // Simulate completion after 3 seconds
   }
 
   // Handle manual "Solve Now" click
@@ -416,7 +326,6 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
       ? duel.challengeeTime
       : duel.challengerTime
     const duelStarted = duelStarts[duel.duelId]
-    const showProblem = duelStarted || userTime !== null
 
     // Only show time if it's a valid number
     const validUserTime = typeof userTime === "number" && !isNaN(userTime)
@@ -481,7 +390,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
         {/* Show Start Duel if user's time is null and duel hasn't started for them */}
         {userTime == null && !duelStarted && (
           <button
-            onClick={() => handleStartDuel(duel.duelId, duel.problemSlug)}
+            onClick={() => handleStartDuel(duel.duelId)}
             disabled={actionLoading[`start_${duel.duelId}`]}
             className="w-full btn-3d bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-bold disabled:opacity-50 border-2 border-black"
           >
@@ -501,9 +410,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
               💻 Solve Now
             </button>
             <div className="text-center text-xs text-gray-600">
-              {pollingIntervals.current[duel.duelId]
-                ? "🔍 Automatically detecting your submission..."
-                : "Click to open problem"}
+              Click to open problem on LeetCode
             </div>
           </div>
         )}
@@ -681,8 +588,6 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
   }
 
   const filteredDuels = duels.filter(filterExpiredDuels)
-  const pendingDuels = filteredDuels.filter((d) => d.status === "PENDING")
-  const activeDuels = filteredDuels.filter((d) => d.status === "ACTIVE")
   const completedDuels = filteredDuels
     .filter((d) => d.status === "COMPLETED")
     .slice(0, 5) // Show last 5 completed

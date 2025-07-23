@@ -213,9 +213,6 @@ export default function Home() {
               <span className="hidden sm:inline">DOWNLOAD FREE</span>
               <span className="sm:hidden">GET</span>
             </Button>
-            <span className="text-sm text-black/70 hidden md:inline">
-              Join the waitlist
-            </span>
           </div>
         </div>
       </header>
@@ -267,19 +264,6 @@ export default function Home() {
                   </svg>
                   Download for Windows
                 </Button>
-                <Button
-                  size="lg"
-                  className="btn-3d inline-flex items-center border-3 border-black bg-white hover:bg-yellow-50 text-black font-bold text-lg md:text-xl px-6 md:px-8 py-3 md:py-4 rounded-xl"
-                >
-                  <svg
-                    className="w-5 h-5 md:w-6 md:h-6 mr-2"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M13.18,14.5C12.53,15.26 11.47,15.26 10.82,14.5L7.44,10.5C7.16,11.28 7,12.12 7,13C7,14.67 7.57,16.18 8.5,17.27L10,15.87L10.05,15.92C10.67,16.44 11.57,16.44 12.19,15.92L13.8,14.43C13.8,14.43 15.46,16.31 15.84,16.78C16.5,15.85 16.91,14.7 16.97,13.47L13.18,14.5M20,13A8,8 0 0,1 12,21A8,8 0 0,1 4,13C4,9.5 6.08,6.5 9,5.26V5.5C9,6.05 9.45,6.5 10,6.5H14C14.55,6.5 15,6.05 15,5.5V5.26C17.92,6.5 20,9.5 20,13M10,4H11V3H13V4H14A1,1 0 0,1 15,5V7.74C14.41,7.4 13.73,7.18 13,7.08V7H11V7.08C10.27,7.18 9.59,7.4 9,7.74V5A1,1 0 0,1 10,4Z" />
-                  </svg>
-                  Download for Linux
-                </Button>
               </div>
             </div>
             <div className="flex items-center gap-6 text-sm text-black/70">
@@ -295,7 +279,7 @@ export default function Home() {
                     clipRule="evenodd"
                   />
                 </svg>
-                Available on all platforms
+                Available on Mac and Windows
               </span>
               <span className="flex items-center gap-1">
                 <svg
@@ -483,7 +467,8 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-xl mb-2">Add Your Friends</h3>
               <p className="text-gray-700">
-                Import from Discord, GitHub, or share your YeetCode username.
+                Connect with friends using their LeetCode usernames or invite
+                them directly through the app.
               </p>
             </div>
             <div className="text-center">
@@ -532,9 +517,9 @@ export default function Home() {
                 When will YeetCode launch?
               </h3>
               <p className="text-gray-700">
-                We&apos;re launching in July 2025! Join the early access list to
-                be the first to know. Beta testers get lifetime premium features
-                (when we add them).
+                We&apos;re launching in early August 2025! Join the early access
+                list to be the first to know. Beta testers get lifetime premium
+                features (when we add them).
               </p>
             </div>
             <div className="panel-3d bg-yellow-50 border-3 border-black rounded-xl p-6">
@@ -542,9 +527,8 @@ export default function Home() {
                 What platforms are supported?
               </h3>
               <p className="text-gray-700">
-                Available for macOS (Intel & Apple Silicon), Windows (10/11),
-                and Linux (Ubuntu, Fedora, Arch). All platforms get the same
-                great features!
+                Available for macOS (Intel & Apple Silicon) and Windows (10/11).
+                Both platforms get the same great features!
               </p>
             </div>
           </div>
@@ -590,19 +574,6 @@ export default function Home() {
                   <path d="M3,12V6.75L9,5.43V11.91L3,12M20,3V11.75L10,11.9V5.21L20,3M3,13L9,13.09V19.9L3,18.75V13M20,13.25V22L10,20.09V13.1L20,13.25Z" />
                 </svg>
                 Windows
-              </Button>
-              <Button
-                size="lg"
-                className="btn-3d inline-flex items-center border-3 border-black bg-white hover:bg-yellow-50 text-black font-bold px-6 py-3 rounded-xl"
-              >
-                <svg
-                  className="w-5 h-5 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M13.18,14.5C12.53,15.26 11.47,15.26 10.82,14.5L7.44,10.5C7.16,11.28 7,12.12 7,13C7,14.67 7.57,16.18 8.5,17.27L10,15.87L10.05,15.92C10.67,16.44 11.57,16.44 12.19,15.92L13.8,14.43C13.8,14.43 15.46,16.31 15.84,16.78C16.5,15.85 16.91,14.7 16.97,13.47L13.18,14.5M20,13A8,8 0 0,1 12,21A8,8 0 0,1 4,13C4,9.5 6.08,6.5 9,5.26V5.5C9,6.05 9.45,6.5 10,6.5H14C14.55,6.5 15,6.05 15,5.5V5.26C17.92,6.5 20,9.5 20,13M10,4H11V3H13V4H14A1,1 0 0,1 15,5V7.74C14.41,7.4 13.73,7.18 13,7.08V7H11V7.08C10.27,7.18 9.59,7.4 9,7.74V5A1,1 0 0,1 10,4Z" />
-                </svg>
-                Linux
               </Button>
             </div>
             <p className="text-sm text-black/70">

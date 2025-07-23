@@ -48,84 +48,84 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
     ? notifications.filter((n) => n.type !== "overtake")
     : notifications
 
-  // Dummy university leaderboard data
+  // Dummy university leaderboard data - aggregated by university
   const universityLeaderboard = [
     {
-      name: "Alex",
-      leetUsername: "alex09",
-      easy: 143,
-      medium: 42,
-      hard: 7,
-      total: 192,
-      xp: 31900,
+      name: "MIT",
+      students: 342,
+      easy: 4821,
+      medium: 2341,
+      hard: 892,
+      total: 8054,
+      totalXP: 13175000,
+      topPlayer: "algo_master_21",
       rank: 1,
-      university: "Stony Brook",
     },
     {
-      name: "CodeMaster2024",
-      leetUsername: "codemaster2024",
-      easy: 156,
-      medium: 78,
-      hard: 23,
-      total: 257,
-      xp: 45600,
+      name: "Stanford",
+      students: 289,
+      easy: 4156,
+      medium: 2102,
+      hard: 743,
+      total: 7001,
+      totalXP: 10182800,
+      topPlayer: "stanford_coder",
       rank: 2,
-      university: "Stony Brook",
     },
     {
-      name: "AlgoQueen",
-      leetUsername: "algoqueen",
-      easy: 134,
-      medium: 89,
-      hard: 34,
-      total: 257,
-      xp: 44200,
+      name: "UC Berkeley",
+      students: 312,
+      easy: 4234,
+      medium: 1987,
+      hard: 651,
+      total: 6872,
+      totalXP: 10015200,
+      topPlayer: "berkeley_algo",
       rank: 3,
-      university: "Stony Brook",
     },
     {
-      name: "BinaryNinja",
-      leetUsername: "binaryninja",
-      easy: 178,
-      medium: 56,
-      hard: 12,
-      total: 246,
-      xp: 42800,
+      name: "Carnegie Mellon",
+      students: 198,
+      easy: 2876,
+      medium: 1423,
+      hard: 512,
+      total: 4811,
+      totalXP: 6237000,
+      topPlayer: "cmu_ninja",
       rank: 4,
-      university: "Stony Brook",
     },
     {
-      name: "DataStructGod",
-      leetUsername: "datastructgod",
-      easy: 165,
-      medium: 67,
-      hard: 18,
-      total: 250,
-      xp: 42100,
+      name: "Stony Brook",
+      students: 156,
+      easy: 2341,
+      medium: 1123,
+      hard: 389,
+      total: 3853,
+      totalXP: 4648800,
+      topPlayer: "alex09",
       rank: 5,
-      university: "Stony Brook",
     },
     {
-      name: "RecursiveGenius",
-      leetUsername: "recursivegenius",
-      easy: 145,
-      medium: 72,
-      hard: 28,
-      total: 245,
-      xp: 41800,
+      name: "Georgia Tech",
+      students: 234,
+      easy: 3456,
+      medium: 1678,
+      hard: 423,
+      total: 5557,
+      totalXP: 6762600,
+      topPlayer: "gt_coder",
       rank: 6,
-      university: "Stony Brook",
     },
     {
-      name: "Sam",
-      leetUsername: "samwise",
-      easy: 118,
-      medium: 49,
-      hard: 5,
-      total: 172,
-      xp: 29600,
+      name: "UT Austin",
+      students: 187,
+      easy: 2765,
+      medium: 1234,
+      hard: 321,
+      total: 4320,
+      totalXP: 5161200,
+      topPlayer: "longhorn_dev",
       rank: 7,
-      university: "Stony Brook",
     },
     {
       name: "GraphWalker",
@@ -247,25 +247,29 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
               <thead className="bg-yellow-100 sticky top-0 z-10">
                 <tr className="border-b-2 border-black">
                   <th className="font-bold text-left px-4 py-2 w-16">RANK</th>
-                  <th className="font-bold text-left px-4 py-2 w-32">PLAYER</th>
+                  <th className="font-bold text-left px-4 py-2 w-40">
+                    UNIVERSITY
+                  </th>
+                  <th className="font-bold text-center px-4 py-2 w-20">
+                    STUDENTS
+                  </th>
                   <th className="font-bold text-center px-4 py-2 w-16">EASY</th>
                   <th className="font-bold text-center px-4 py-2 w-16">MED</th>
                   <th className="font-bold text-center px-4 py-2 w-16">HARD</th>
                   <th className="font-bold text-center px-4 py-2 w-20">
                     TOTAL
                   </th>
-                  <th className="font-bold text-center px-4 py-2 w-24">XP</th>
+                  <th className="font-bold text-center px-4 py-2 w-24">
+                    TOTAL XP
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <AnimatePresence mode="wait">
                   {universityLeaderboard
-                    .sort((a, b) => calculateXP(b) - calculateXP(a))
-                    .map((user, index) => {
-                      const isCurrentUser =
-                        user.username === userData.leetUsername?.toLowerCase()
-                      const total = user.easy + user.medium + user.hard
-                      const userXP = calculateXP(user)
+                    .sort((a, b) => b.totalXP - a.totalXP)
+                    .map((university, index) => {
+                      const isUserUniversity = university.name === "Stony Brook" // Assuming user is from Stony Brook
                       const bgColor =
                         index === 0
                           ? "bg-red-100"
@@ -273,95 +277,49 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
                             ? "bg-blue-100"
                             : index === 2
                               ? "bg-green-100"
-                              : isCurrentUser
+                              : isUserUniversity
                                 ? "bg-blue-50 border-l-4 border-blue-400"
                                 : ""
 
-                      const textStyle = isCurrentUser
-                        ? "font-semibold text-blue-700"
-                        : ""
-                      const rankStyle = isCurrentUser
-                        ? "font-bold text-blue-700"
-                        : "font-bold"
-
                       return (
                         <motion.tr
-                          key={`uni-${user.username || user.leetUsername || index}`}
+                          key={`uni-${university.name}`}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                           className={`border-b border-gray-200 ${bgColor}`}
                         >
-                          <td className={`px-4 py-3 w-16 ${rankStyle}`}>
+                          <td className={`px-4 py-3 w-16 font-bold`}>
                             #{index + 1}
                           </td>
-                          <td className="px-4 py-3 w-32">
-                            <div className="flex items-center gap-2">
-                              <div
-                                className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border border-black ${isCurrentUser ? "bg-blue-200 text-blue-800" : "bg-gray-300"}`}
-                              >
-                                {user.name.substring(0, 2).toUpperCase()}
+                          <td className="px-4 py-3 w-40">
+                            <div>
+                              <div className="font-semibold">
+                                {university.name}
                               </div>
-                              <div>
-                                <span
-                                  className={
-                                    isCurrentUser
-                                      ? "font-semibold text-blue-700"
-                                      : ""
-                                  }
-                                  onMouseEnter={() =>
-                                    setHoveredUser(user.username)
-                                  }
-                                  onMouseLeave={() => setHoveredUser(null)}
-                                  style={{
-                                    position: "relative",
-                                    cursor: "pointer",
-                                  }}
-                                >
-                                  {isCurrentUser ? "You" : user.name}
-                                  {/* Tooltip for rank */}
-                                  {hoveredUser === user.username && (
-                                    <div className="absolute left-1/2 bottom-full z-50 mb-1 -translate-x-1/2 bg-black text-white text-xs rounded px-3 py-1 shadow-lg border-2 border-yellow-300 whitespace-nowrap pointer-events-none animate-fade-in-down">
-                                      {(() => {
-                                        const xp = calculateXP(user)
-                                        const { name: rankName, sub: rankSub } =
-                                          getRankAndSubdivision(xp)
-                                        return `${rankName} ${rankSub}`
-                                      })()}
-                                    </div>
-                                  )}
-                                </span>
-                                <div className="text-xs text-gray-500">
-                                  {user.university}
-                                </div>
+                              <div className="text-xs text-gray-500">
+                                Top: {university.topPlayer}
                               </div>
                             </div>
                           </td>
-                          <td
-                            className={`text-center px-4 py-3 w-16 ${textStyle}`}
-                          >
-                            {user.easy}
+                          <td className="text-center px-4 py-3 w-20">
+                            {university.students}
                           </td>
-                          <td
-                            className={`text-center px-4 py-3 w-16 ${textStyle}`}
-                          >
-                            {user.medium}
+                          <td className="text-center px-4 py-3 w-16">
+                            {university.easy.toLocaleString()}
                           </td>
-                          <td
-                            className={`text-center px-4 py-3 w-16 ${textStyle}`}
-                          >
-                            {user.hard}
+                          <td className="text-center px-4 py-3 w-16">
+                            {university.medium.toLocaleString()}
                           </td>
-                          <td
-                            className={`text-center px-4 py-3 w-20 font-bold ${isCurrentUser ? "text-blue-700" : "text-blue-600"}`}
-                          >
-                            {total}
+                          <td className="text-center px-4 py-3 w-16">
+                            {university.hard.toLocaleString()}
                           </td>
-                          <td
-                            className={`text-center px-4 py-3 w-24 font-bold ${isCurrentUser ? "text-purple-700" : "text-purple-600"}`}
-                          >
-                            {userXP.toLocaleString()}
+                          <td className="text-center px-4 py-3 w-20 font-bold text-blue-600">
+                            {university.total.toLocaleString()}
+                          </td>
+                          <td className="text-center px-4 py-3 w-24 font-bold text-purple-600">
+                            {(university.totalXP / 1000).toFixed(1)}K
                           </td>
                         </motion.tr>
                       )

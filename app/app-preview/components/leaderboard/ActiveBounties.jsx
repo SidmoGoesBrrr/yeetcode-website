@@ -195,75 +195,80 @@ const ActiveBounties = ({ userData }) => {
         className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar"
         style={{ maxHeight: "320px" }}
       >
-        {activeBounties.map((bounty) => (
-          <div
-            key={bounty.bountyId}
-            className={`flex flex-row items-start bg-white rounded-xl shadow border border-gray-200 p-4 transition-all ${bounty.progressPercent === 100 ? "opacity-70" : ""}`}
-            style={{ minHeight: "110px" }}
-          >
-            {/* Icon */}
-            <div className="flex-shrink-0 mr-4 mt-1 text-3xl">
-              {getBountyIcon(bounty.type, bounty.tags)}
-            </div>
-            {/* Main content */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 min-w-0">
-                  <span
-                    className="font-bold text-base truncate"
-                    title={bounty.title}
-                  >
-                    {bounty.title}
-                  </span>
-                  <span
-                    className={`ml-2 px-2 py-0.5 rounded text-xs font-bold uppercase ${getDifficultyColor(bounty.difficulty)} text-white`}
-                  >
-                    {bounty.difficulty}
-                  </span>
-                </div>
-                <div className="text-right ml-2">
-                  <span className="text-lg font-bold text-orange-500">
-                    {bounty.xp} XP
-                  </span>
-                </div>
+        {activeBounties.map((bounty) => {
+          const progressPercent = Math.round(
+            (bounty.userProgress / bounty.count) * 100
+          )
+          return (
+            <div
+              key={bounty.bountyId}
+              className={`flex flex-row items-start bg-white rounded-xl shadow border border-gray-200 p-4 transition-all ${progressPercent === 100 ? "opacity-70" : ""}`}
+              style={{ minHeight: "110px" }}
+            >
+              {/* Icon */}
+              <div className="flex-shrink-0 mr-4 mt-1 text-3xl">
+                {getBountyIcon(bounty.type, bounty.tags)}
               </div>
-              <div
-                className="text-gray-600 text-sm mt-1 mb-1"
-                title={bounty.description}
-              >
-                {bounty.description}
-              </div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs text-gray-500">
-                  {formatTimeRemaining(bounty.daysRemaining)}
-                </span>
-              </div>
-              <div className="flex items-center gap-2 mt-1">
-                <div className="flex-1 h-3 bg-gray-200 rounded-full overflow-hidden">
-                  <div
-                    className={`h-3 rounded-full transition-all duration-300 ${bounty.progressPercent === 100 ? "bg-green-500" : "bg-blue-400"}`}
-                    style={{ width: `${bounty.progressPercent}%` }}
-                  ></div>
-                </div>
-                <span className="text-xs text-gray-700 font-mono ml-2 min-w-[40px] text-right">
-                  {bounty.userProgress}/{bounty.count}
-                </span>
-              </div>
-              {bounty.tags && bounty.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {bounty.tags.map((tag, idx) => (
+              {/* Main content */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 min-w-0">
                     <span
-                      key={idx}
-                      className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs font-medium"
+                      className="font-bold text-base truncate"
+                      title={bounty.title}
                     >
-                      {tag}
+                      {bounty.title}
                     </span>
-                  ))}
+                    <span
+                      className={`ml-2 px-2 py-0.5 rounded text-xs font-bold uppercase ${getDifficultyColor(bounty.difficulty)} text-white`}
+                    >
+                      {bounty.difficulty}
+                    </span>
+                  </div>
+                  <div className="text-right ml-2">
+                    <span className="text-lg font-bold text-orange-500">
+                      {bounty.xp} XP
+                    </span>
+                  </div>
                 </div>
-              )}
+                <div
+                  className="text-gray-600 text-sm mt-1 mb-1"
+                  title={bounty.description}
+                >
+                  {bounty.description}
+                </div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xs text-gray-500">
+                    {formatTimeRemaining(bounty.daysRemaining)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="flex-1 h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className={`h-3 rounded-full transition-all duration-300 ${progressPercent === 100 ? "bg-green-500" : "bg-blue-400"}`}
+                      style={{ width: `${progressPercent}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-xs text-gray-700 font-mono ml-2 min-w-[40px] text-right">
+                    {bounty.userProgress}/{bounty.count}
+                  </span>
+                </div>
+                {bounty.tags && bounty.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {bounty.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
