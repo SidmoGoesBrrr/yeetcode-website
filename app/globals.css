@@ -8,9 +8,9 @@
   --yeetcode-blue: #3b82f6;
   --yeetcode-blue-dark: #1d4ed8;
   --yeetcode-blue-light: #60a5fa;
-  --yeetcode-yellow: #f59e0b;
-  --yeetcode-yellow-dark: #d97706;
-  --yeetcode-yellow-light: #fbbf24;
+  --yeetcode-yellow: #fde047;
+  --yeetcode-yellow-dark: #facc15;
+  --yeetcode-yellow-light: #fef08a;
   --yeetcode-green: #10b981;
   --yeetcode-green-dark: #059669;
   --yeetcode-orange: #f97316;
@@ -18,16 +18,16 @@
   --yeetcode-red: #ef4444;
   --yeetcode-red-dark: #dc2626;
 
-  --bg-primary: #fef3c7;
-  --bg-secondary: #ffffff;
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
   --bg-tertiary: #f3f4f6;
 
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
   --text-muted: #9ca3af;
 
   --border-primary: #000000;
-  --border-secondary: #d1d5db;
+  --border-secondary: #e5e7eb;
 
   /* Map existing tokens */
   --background: var(--bg-primary);
@@ -109,41 +109,123 @@
 
 @layer components {
   .hero-section {
-    background: linear-gradient(
-      135deg,
-      var(--yeetcode-blue) 0%,
-      var(--yeetcode-blue-dark) 100%
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0, 0, 0, 0.03) 10px,
+      rgba(0, 0, 0, 0.03) 20px
     );
+    transform: rotate(45deg);
+    pointer-events: none;
+  }
+
+  .carousel-slide {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .slide-in-right {
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .slide-in-left {
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  /* Responsive utilities */
+  @media (max-width: 640px) {
+    .hero-section {
+      padding: 3rem 1rem;
+    }
+  }
+
+  /* 3D Button Effects */
+  .btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .btn--primary {
+    background-color: #16a34a;
+
     color: white;
-    text-align: center;
-    padding: 4rem 2rem;
   }
 
-  .hero-title {
-    @apply text-4xl md:text-6xl font-extrabold mb-4;
-    text-shadow: 2px 2px 0 var(--border-primary);
+  .btn--primary:hover {
+    background-color: #15803d;
   }
 
-  .hero-subtitle {
-    @apply text-lg md:text-xl mb-8;
-    opacity: 0.9;
+  /* Enhanced 3D Button Effects */
+  .btn-3d {
+    position: relative;
+    box-shadow: 6px 6px 0 #000;
+    transition: all 0.15s ease-in-out;
+    transform: translate(0, 0);
   }
 
-  .cta-button {
-    background: var(--yeetcode-yellow);
-    color: var(--text-primary);
-    border: 3px solid var(--border-primary);
-    border-radius: 12px;
-    padding: 1rem 2rem;
-    font-weight: 700;
-    font-size: 1.125rem;
-    box-shadow: 0 6px 0 var(--yeetcode-yellow-dark);
-    transition: all 0.2s ease;
+  .btn-3d:active {
+    transform: translate(6px, 6px);
+    box-shadow: none;
   }
 
-  .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 0 var(--yeetcode-yellow-dark);
+  .btn-3d:hover {
+    box-shadow: 2px 2px 0 #000;
+    transform: translate(4px, 4px);
+  }
+
+  .btn-3d:active:hover {
+    transform: translate(6px, 6px);
+    box-shadow: none;
+  }
+
+  /* Additional shadow variations */
+  .shadow-3d-sm {
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .shadow-3d-md {
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .shadow-3d-lg {
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
   }
 
   .feature-card {
@@ -156,8 +238,94 @@
     transition: transform 0.2s ease;
   }
 
-  .feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  /* Button press animation */
+  .btn-press {
+    transition: all 0.1s ease-in-out;
   }
+  .btn-press:active {
+    transform: scale(0.98);
+  }
+
+  /* Panel 3D effects */
+  .panel-3d {
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .panel-3d:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Retro game-like button effects */
+  .btn-retro {
+    border: 3px solid #000;
+    box-shadow:
+      inset 2px 2px 0 rgba(255, 255, 255, 0.3),
+      inset -2px -2px 0 rgba(0, 0, 0, 0.3),
+      4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .btn-retro:active {
+    box-shadow:
+      inset 2px 2px 0 rgba(0, 0, 0, 0.3),
+      inset -2px -2px 0 rgba(255, 255, 255, 0.3);
+    transform: translate(2px, 2px);
+  }
+
+  /* Custom Scrollbar Styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #60a5fa;
+    border-radius: 4px;
+    border: 1px solid #000;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+  }
+
+  /* Firefox scrollbar styling */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #60a5fa #f1f5f9;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.animate-fade-in-out {
+  animation: fadeInOut 5s both;
+}
+@keyframes confettiFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+.animate-confetti {
+  animation: confettiFloat 2.5s infinite linear alternate;
 }
