@@ -1,15 +1,12 @@
 "use client"
 import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Trophy,
   Sword,
   CalendarDays,
-  BadgeDollarSign,
   Download,
   Star,
-  Download,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react"
