@@ -52,7 +52,7 @@ export default function IssueForm({ isOpen, onClose }: IssueFormProps) {
     } catch (error) {
       console.error("Error submitting form:", error)
       // Fallback to mailto if there's an error
-      const mailtoLink = `mailto:yeeeeetcode@gmail.com?subject=[${formData.issueType.toUpperCase()}] ${formData.subject}&body=From: ${formData.email}%0D%0A%0D%0AIssue Type: ${formData.issueType}%0D%0A%0D%0A${encodeURIComponent(formData.description)}`
+      const mailtoLink = `mailto:yeeeeetcode@gmail.com?subject=[${formData.issueType.toUpperCase()}] ${formData.subject}&body=From: ${formData.name}%0D%0A%0D%0AIssue Type: ${formData.issueType}%0D%0A%0D%0A${encodeURIComponent(formData.description)}`
       window.location.href = mailtoLink
     } finally {
       setIsSubmitting(false)

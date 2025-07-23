@@ -75,7 +75,7 @@ export default function ContactSection() {
           Need Help?
         </h2>
         <p className="text-center text-gray-600 mb-8">
-          Found a bug? Have a feature request? We'd love to hear from you!
+          Found a bug? Have a feature request? We&apos;d love to hear from you!
         </p>
 
         <div className="panel-3d bg-white border-4 border-black rounded-xl p-6 md:p-8">
@@ -160,7 +160,7 @@ export default function ContactSection() {
             <div className="mt-4 p-4 bg-green-100 border-2 border-green-400 rounded-lg flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-green-600" />
               <span className="text-green-800 font-medium">
-                Message sent successfully! We'll get back to you soon.
+                Message sent successfully! We&apos;ll get back to you soon.
               </span>
             </div>
           )}
