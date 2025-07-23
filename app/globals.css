@@ -227,7 +227,7 @@
   .shadow-3d-lg {
     box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
   }
-  
+
   .feature-card {
     background: var(--bg-secondary);
     border: 6px solid var(--border-primary);
@@ -299,4 +299,33 @@
     scrollbar-width: thin;
     scrollbar-color: #60a5fa #f1f5f9;
   }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.animate-fade-in-out {
+  animation: fadeInOut 5s both;
+}
+@keyframes confettiFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+.animate-confetti {
+  animation: confettiFloat 2.5s infinite linear alternate;
 }

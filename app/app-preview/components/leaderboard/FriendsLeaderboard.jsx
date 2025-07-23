@@ -174,10 +174,7 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
   ]
 
   return (
-    <div
-      className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden flex flex-col"
-      style={{ height: "310px" }}
-    >
+    <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden flex flex-col w-full h-full">
       <div className="bg-blue-500 px-6 py-4 border-b-4 border-black flex-shrink-0">
         {/* Header: Title + Tabs + Notifications */}
         <div className="flex items-center justify-between gap-2">
@@ -242,99 +239,109 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
       </div>
       <div className="flex-1 overflow-hidden">
         {activeTab === "university" ? (
-          <div className="h-full overflow-y-auto custom-scrollbar">
-            <table className="min-w-full table-fixed">
-              <thead className="bg-yellow-100 sticky top-0 z-10">
-                <tr className="border-b-2 border-black">
-                  <th className="font-bold text-left px-4 py-2 w-16">RANK</th>
-                  <th className="font-bold text-left px-4 py-2 w-40">
-                    UNIVERSITY
-                  </th>
-                  <th className="font-bold text-center px-4 py-2 w-20">
-                    STUDENTS
-                  </th>
-                  <th className="font-bold text-center px-4 py-2 w-16">EASY</th>
-                  <th className="font-bold text-center px-4 py-2 w-16">MED</th>
-                  <th className="font-bold text-center px-4 py-2 w-16">HARD</th>
-                  <th className="font-bold text-center px-4 py-2 w-20">
-                    TOTAL
-                  </th>
-                  <th className="font-bold text-center px-4 py-2 w-24">
-                    TOTAL XP
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <AnimatePresence mode="wait">
-                  {universityLeaderboard
-                    .sort((a, b) => b.totalXP - a.totalXP)
-                    .map((university, index) => {
-                      const isUserUniversity = university.name === "Stony Brook" // Assuming user is from Stony Brook
-                      const bgColor =
-                        index === 0
-                          ? "bg-red-100"
-                          : index === 1
-                            ? "bg-blue-100"
-                            : index === 2
-                              ? "bg-green-100"
-                              : isUserUniversity
-                                ? "bg-blue-50 border-l-4 border-blue-400"
-                                : ""
+          <div className="flex-1">
+            <div className="overflow-x-auto w-full max-w-full h-full max-h-[260px]">
+              <table className="w-full max-w-full table-fixed">
+                <thead className="bg-yellow-100 sticky top-0 z-10">
+                  <tr className="border-b-2 border-black">
+                    <th className="font-bold text-left px-4 py-2 w-16">RANK</th>
+                    <th className="font-bold text-left px-4 py-2 w-40">
+                      UNIVERSITY
+                    </th>
+                    <th className="font-bold text-center px-4 py-2 w-20">
+                      STUDENTS
+                    </th>
+                    <th className="font-bold text-center px-4 py-2 w-16">
+                      EASY
+                    </th>
+                    <th className="font-bold text-center px-4 py-2 w-16">
+                      MED
+                    </th>
+                    <th className="font-bold text-center px-4 py-2 w-16">
+                      HARD
+                    </th>
+                    <th className="font-bold text-center px-4 py-2 w-20">
+                      TOTAL
+                    </th>
+                    <th className="font-bold text-center px-4 py-2 w-24">
+                      TOTAL XP
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <AnimatePresence mode="wait">
+                    {universityLeaderboard
+                      .sort((a, b) => b.totalXP - a.totalXP)
+                      .slice(0, 7)
+                      .map((university, index) => {
+                        const isUserUniversity =
+                          university.name === "Stony Brook" // Assuming user is from Stony Brook
+                        const bgColor =
+                          index === 0
+                            ? "bg-red-100"
+                            : index === 1
+                              ? "bg-blue-100"
+                              : index === 2
+                                ? "bg-green-100"
+                                : isUserUniversity
+                                  ? "bg-blue-50 border-l-4 border-blue-400"
+                                  : ""
 
-                      return (
-                        <motion.tr
-                          key={`uni-${university.name}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className={`border-b border-gray-200 ${bgColor}`}
-                        >
-                          <td className={`px-4 py-3 w-16 font-bold`}>
-                            #{index + 1}
-                          </td>
-                          <td className="px-4 py-3 w-40">
-                            <div>
-                              <div className="font-semibold">
-                                {university.name}
+                        return (
+                          <motion.tr
+                            key={`uni-${university.name}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className={`border-b border-gray-200 ${bgColor}`}
+                          >
+                            <td className={`px-4 py-3 w-16 font-bold`}>
+                              #{index + 1}
+                            </td>
+                            <td className="px-4 py-3 w-40">
+                              <div>
+                                <div className="font-semibold">
+                                  {university.name}
+                                </div>
+                                <div className="text-xs text-gray-500">
+                                  Top: {university.topPlayer}
+                                </div>
                               </div>
-                              <div className="text-xs text-gray-500">
-                                Top: {university.topPlayer}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="text-center px-4 py-3 w-20">
-                            {university.students}
-                          </td>
-                          <td className="text-center px-4 py-3 w-16">
-                            {university.easy.toLocaleString()}
-                          </td>
-                          <td className="text-center px-4 py-3 w-16">
-                            {university.medium.toLocaleString()}
-                          </td>
-                          <td className="text-center px-4 py-3 w-16">
-                            {university.hard.toLocaleString()}
-                          </td>
-                          <td className="text-center px-4 py-3 w-20 font-bold text-blue-600">
-                            {university.total.toLocaleString()}
-                          </td>
-                          <td className="text-center px-4 py-3 w-24 font-bold text-purple-600">
-                            {(university.totalXP / 1000).toFixed(1)}K
-                          </td>
-                        </motion.tr>
-                      )
-                    })}
-                </AnimatePresence>
-              </tbody>
-            </table>
+                            </td>
+                            <td className="text-center px-4 py-3 w-20">
+                              {university.students}
+                            </td>
+                            <td className="text-center px-4 py-3 w-16">
+                              {university.easy.toLocaleString()}
+                            </td>
+                            <td className="text-center px-4 py-3 w-16">
+                              {university.medium.toLocaleString()}
+                            </td>
+                            <td className="text-center px-4 py-3 w-16">
+                              {university.hard.toLocaleString()}
+                            </td>
+                            <td className="text-center px-4 py-3 w-20 font-bold text-blue-600">
+                              {university.total.toLocaleString()}
+                            </td>
+                            <td className="text-center px-4 py-3 w-24 font-bold text-purple-600">
+                              {(university.totalXP / 1000).toFixed(1)}K
+                            </td>
+                          </motion.tr>
+                        )
+                      })}
+                  </AnimatePresence>
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : leaderboard.length === 0 ? (
           <div className="text-center text-gray-500 py-8">
             No competitors yet! Invite friends to join.
           </div>
         ) : (
-          <div className="h-full overflow-y-auto custom-scrollbar">
-            <table className="min-w-full table-fixed">
+          <div className="overflow-x-auto w-full max-w-full h-full max-h-[260px]">
+            <table className="w-full max-w-full table-fixed">
               <thead className="bg-yellow-100 sticky top-0 z-10">
                 <tr className="border-b-2 border-black">
                   <th className="font-bold text-left px-4 py-2 w-16">RANK</th>

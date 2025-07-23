@@ -108,6 +108,83 @@ const leaderboard: LeaderboardUser[] = [
     xp: 27200,
     rank: 3,
   },
+  {
+    name: "Morgan",
+    leetUsername: "morgan",
+    username: "morgan",
+    easy: 90,
+    medium: 40,
+    hard: 10,
+    total: 140,
+    xp: 21000,
+    rank: 4,
+  },
+  {
+    name: "Priya",
+    leetUsername: "priyacodes",
+    username: "priyacodes",
+    easy: 105,
+    medium: 38,
+    hard: 8,
+    total: 151,
+    xp: 19800,
+    rank: 5,
+  },
+  {
+    name: "Liam",
+    leetUsername: "liam_dev",
+    username: "liam_dev",
+    easy: 80,
+    medium: 30,
+    hard: 5,
+    total: 115,
+    xp: 15000,
+    rank: 6,
+  },
+  {
+    name: "Sophia",
+    leetUsername: "sophiax",
+    username: "sophiax",
+    easy: 95,
+    medium: 25,
+    hard: 3,
+    total: 123,
+    xp: 14200,
+    rank: 7,
+  },
+  {
+    name: "Ethan",
+    leetUsername: "ethanleet",
+    username: "ethanleet",
+    easy: 70,
+    medium: 20,
+    hard: 2,
+    total: 92,
+    xp: 9800,
+    rank: 8,
+  },
+  {
+    name: "Ava",
+    leetUsername: "ava_coder",
+    username: "ava_coder",
+    easy: 60,
+    medium: 15,
+    hard: 1,
+    total: 76,
+    xp: 7600,
+    rank: 9,
+  },
+  {
+    name: "Noah",
+    leetUsername: "noahjs",
+    username: "noahjs",
+    easy: 50,
+    medium: 10,
+    hard: 0,
+    total: 60,
+    xp: 6000,
+    rank: 10,
+  },
 ]
 const dailyData: DailyData = {
   dailyComplete: false,
@@ -206,7 +283,7 @@ export default function Home() {
       <header className="border-b-4 border-black py-4 md:py-6 bg-white">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8">
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-            YEETCODE
+            YeetCode
           </h1>
           <div className="flex items-center gap-4">
             <Button className="btn-3d border-3 border-black bg-yellow-300 hover:bg-yellow-400 text-black font-bold px-4 md:px-6 py-2 md:py-3">
@@ -294,14 +371,14 @@ export default function Home() {
                     clipRule="evenodd"
                   />
                 </svg>
-                100% Free Beta
+                100% free
               </span>
             </div>
           </div>
 
           <div className="bg-yellow-50 border-3 border-black rounded-xl p-4 max-w-2xl mx-auto">
             <p className="text-sm font-bold text-black text-center">
-              🚀 EARLY ACCESS: First 1000 users get lifetime premium features
+              🚀 EARLY ACCESS: First 500 users get lifetime premium features
               (when we build them)
             </p>
           </div>
@@ -431,7 +508,12 @@ export default function Home() {
               Want to help shape YeetCode? Join our Discord and tell us what
               features you want!
             </p>
-            <button className="btn-3d inline-flex items-center border-3 border-black bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-3 rounded-xl">
+            <a
+              className="btn-3d inline-flex items-center border-3 border-black bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-3 rounded-xl"
+              href="https://discord.gg/HdsjVqqmSV"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <svg
                 className="w-5 h-5 mr-2"
                 fill="currentColor"
@@ -439,8 +521,8 @@ export default function Home() {
               >
                 <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.994a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
               </svg>
-              Join Beta Testing Discord
-            </button>
+              Join v0 Discord
+            </a>
           </div>
         </div>
       </section>
@@ -518,9 +600,8 @@ export default function Home() {
                 When will YeetCode launch?
               </h3>
               <p className="text-gray-700">
-                We&apos;re launching in early August 2025! Join the early access
-                list to be the first to know. Beta testers get lifetime premium
-                features (when we add them).
+                We&apos;re launching in early August 2025! Beta testers get
+                lifetime premium features (when we add those).
               </p>
             </div>
             <div className="panel-3d bg-yellow-50 border-3 border-black rounded-xl p-6">

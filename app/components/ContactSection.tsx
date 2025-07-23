@@ -18,22 +18,6 @@ export default function ContactSection() {
     setIsSubmitting(true)
 
     try {
-      // Option 1: Use EmailJS (sign up at emailjs.com)
-      // Uncomment and add your EmailJS credentials
-      /*
-      await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        {
-          from_email: formData.email,
-          subject: `[${formData.issueType.toUpperCase()}] ${formData.subject}`,
-          message: formData.description,
-        },
-        'YOUR_PUBLIC_KEY'
-      );
-      */
-
-      // Option 2: Use your own API endpoint
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -108,10 +92,10 @@ export default function ContactSection() {
                   }
                   className="w-full px-3 py-2 border-2 border-black rounded-lg focus:outline-none focus:border-yellow-400"
                 >
-                  <option value="bug">🐛 Bug Report</option>
-                  <option value="feature">✨ Feature Request</option>
-                  <option value="question">❓ Question</option>
-                  <option value="feedback">💭 General Feedback</option>
+                  <option value="bug">Bug Report</option>
+                  <option value="feature">Feature Request</option>
+                  <option value="question">Question</option>
+                  <option value="feedback">General Feedback</option>
                 </select>
               </div>
             </div>

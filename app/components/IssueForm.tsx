@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { X } from "lucide-react"
+import { X, Bug, Sparkles, HelpCircle, MessageSquare } from "lucide-react"
 
 interface IssueFormProps {
   isOpen: boolean
@@ -91,18 +91,34 @@ export default function IssueForm({ isOpen, onClose }: IssueFormProps) {
 
           <div>
             <label className="block font-bold mb-2">Issue Type</label>
-            <select
-              value={formData.issueType}
-              onChange={(e) =>
-                setFormData({ ...formData, issueType: e.target.value })
-              }
-              className="w-full px-3 py-2 border-2 border-black rounded-lg focus:outline-none focus:border-yellow-400"
-            >
-              <option value="bug">🐛 Bug Report</option>
-              <option value="feature">✨ Feature Request</option>
-              <option value="question">❓ Question</option>
-              <option value="feedback">💭 General Feedback</option>
-            </select>
+            <div className="relative">
+              <select
+                value={formData.issueType}
+                onChange={(e) =>
+                  setFormData({ ...formData, issueType: e.target.value })
+                }
+                className="w-full px-3 py-2 border-2 border-black rounded-lg focus:outline-none focus:border-yellow-400 appearance-none pr-10"
+              >
+                <option value="bug">Bug Report</option>
+                <option value="feature">Feature Request</option>
+                <option value="question">Question</option>
+                <option value="feedback">General Feedback</option>
+              </select>
+              <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                {formData.issueType === "bug" && (
+                  <Bug className="w-5 h-5 text-yellow-500" />
+                )}
+                {formData.issueType === "feature" && (
+                  <Sparkles className="w-5 h-5 text-yellow-500" />
+                )}
+                {formData.issueType === "question" && (
+                  <HelpCircle className="w-5 h-5 text-yellow-500" />
+                )}
+                {formData.issueType === "feedback" && (
+                  <MessageSquare className="w-5 h-5 text-yellow-500" />
+                )}
+              </div>
+            </div>
           </div>
 
           <div>

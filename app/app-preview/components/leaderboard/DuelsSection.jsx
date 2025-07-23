@@ -523,20 +523,22 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
     if (!showWinMessage || !lastWinData) return null
 
     return (
-      <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
-        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 border-4 border-black rounded-xl p-8 shadow-2xl pointer-events-auto animate-bounce">
-          <div className="text-center">
-            <div className="text-6xl mb-4">🏆</div>
-            <h2 className="text-3xl font-bold text-white mb-2">VICTORY!</h2>
-            <p className="text-xl text-white mb-2">
-              You won the duel against {lastWinData.problemTitle}!
-            </p>
-            <p className="text-lg text-white mb-4">
-              Time: {formatTime(lastWinData.time)}
-            </p>
-            <div className="bg-white text-orange-600 px-4 py-2 rounded-lg font-bold text-xl">
-              +{lastWinData.xpAwarded} XP EARNED! 🎉
-            </div>
+      <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none bg-black bg-opacity-30">
+        <div
+          className="bg-white border-2 border-green-300 rounded-xl p-6 shadow-lg pointer-events-auto flex flex-col items-center"
+          style={{ minWidth: 280 }}
+        >
+          <div className="text-4xl mb-2 text-green-500">🏆</div>
+          <h2 className="text-xl font-bold text-green-700 mb-1">Victory</h2>
+          <p className="text-base text-gray-700 mb-1 text-center">
+            You won the duel against{" "}
+            <span className="font-semibold">{lastWinData.problemTitle}</span>!
+          </p>
+          <p className="text-sm text-gray-500 mb-2">
+            Time: {formatTime(lastWinData.time)}
+          </p>
+          <div className="bg-green-100 text-green-700 px-3 py-1 rounded font-semibold text-base">
+            +{lastWinData.xpAwarded} XP
           </div>
         </div>
       </div>
@@ -578,10 +580,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
     .slice(0, 5) // Show last 5 completed
 
   return (
-    <div
-      className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden relative"
-      style={{ height: "380px" }}
-    >
+    <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden relative w-full h-full">
       {/* Win message overlay */}
       <WinMessage />
 
@@ -608,7 +607,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           <h3 className="font-bold text-white text-lg">DUELS</h3>
         </div>
       </div>
-      <div className="p-6" style={{ height: "307px" }}>
+      <div className="p-6 overflow-y-auto max-h-[400px] md:max-h-none">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Challenge Friends */}
           <div

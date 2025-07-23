@@ -1,32 +1,27 @@
 import { NextRequest, NextResponse } from "next/server"
-import { Resend } from "resend"
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { name, subject, description, issueType } = body
 
-    // Initialize Resend with API key
-    const resend = new Resend(process.env.RESEND_API_KEY)
-
-    // Send email using Resend
-    const data = await resend.emails.send({
-      from: "auth@yeetcode.xyz",
-      to: "yeeeeetcode@gmail.com",
-      subject: subject,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>From:</strong> ${name}</p>
-        <p><strong>Issue Type:</strong> ${issueType || "General"}</p>
-        <hr />
-        <p><strong>Message:</strong></p>
-        <p>${description.replace(/\n/g, "<br>")}</p>
-      `,
-      text: `From: ${name}\n\nIssue Type: ${issueType || "General"}\n\n${description}`,
+    // Prepare Discord webhook payload
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL
+    if (!webhookUrl) {
+      throw new Error("Discord webhook URL not configured")
+    }
+    const content = `**New Feedback Submission**\n**From:** ${name}\n**Type:** ${issueType || "General"}\n**Subject:** ${subject}\n**Description:**\n${description}`
+    const discordPayload = {
+      content,
+    }
+    const discordRes = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(discordPayload),
     })
-
-    console.log("Email sent successfully:", data)
-
+    if (!discordRes.ok) {
+      throw new Error("Failed to send to Discord webhook")
+    }
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error("Contact form error:", error)
