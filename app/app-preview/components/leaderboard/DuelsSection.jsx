@@ -517,21 +517,6 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
 
   // When duels are reloaded, reset duelStarts for duels that are not started
   // This useEffect is no longer needed as we are not loading from API
-  // useEffect(() => {
-  //   setDuelStarts(prev => {
-  //     const newStarts = { ...prev };
-  //     duels.forEach(duel => {
-  //       const isChallenger = duel.challenger === userData.leetUsername;
-  //       const userTime = isChallenger
-  //         ? duel.challengerTime
-  //         : duel.challengeeTime;
-  //       if (!userTime) {
-  //         newStarts[duel.duelId] = undefined;
-  //       }
-  //     });
-  //     return newStarts;
-  //   });
-  // }, [duels, userData.leetUsername]);
 
   // Win message component
   const WinMessage = () => {
