@@ -184,6 +184,7 @@
 
   .btn--primary {
     background-color: #16a34a;
+
     color: white;
   }
 
@@ -226,12 +227,21 @@
   .shadow-3d-lg {
     box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
   }
+  
+  .feature-card {
+    background: var(--bg-secondary);
+    border: 6px solid var(--border-primary);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-black);
+    transition: transform 0.2s ease;
+  }
 
   /* Button press animation */
   .btn-press {
     transition: all 0.1s ease-in-out;
   }
-
   .btn-press:active {
     transform: scale(0.98);
   }
