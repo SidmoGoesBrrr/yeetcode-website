@@ -263,39 +263,39 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
     return (
       <div
         key={duel.duelId}
-        className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-3 mb-4"
-        style={{ height: isChallenger ? "80px" : "95px" }}
+        className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-2 sm:p-3 mb-3 sm:mb-4"
+        style={{ minHeight: isChallenger ? "70px" : "85px" }}
       >
-        <div className="flex justify-between items-start mb-2">
-          <div>
-            <h5 className="font-bold text-sm" style={{ fontSize: "12px" }}>
+        <div className="flex justify-between items-start mb-1 sm:mb-2">
+          <div className="flex-1">
+            <h5 className="font-bold text-xs sm:text-sm">
               {isChallenger
                 ? `Challenge sent to ${otherUserDisplay}`
                 : `Challenge from Taylor • ${duel.difficulty}`}
             </h5>
-            <p className="text-gray-600" style={{ fontSize: "12px" }}>
+            <p className="text-gray-600 text-[10px] sm:text-xs">
               {isChallenger ? `${duel.difficulty} • All the best!` : ""}
             </p>
             {timeRemaining > 0 && (
-              <p className="text-xs text-orange-600 font-bold">
+              <p className="text-[10px] sm:text-xs text-orange-600 font-bold">
                 ⏰ Expires in {hoursRemaining}h {minutesRemaining}m
               </p>
             )}
           </div>
-          <span className="text-xs bg-yellow-200 px-2 py-1 rounded font-bold">
+          <span className="text-[10px] sm:text-xs bg-yellow-200 px-1 sm:px-2 py-0.5 sm:py-1 rounded font-bold">
             PENDING
           </span>
         </div>
 
         {!isChallenger && (
-          <div className="flex gap-3 mt-2">
+          <div className="flex gap-2 sm:gap-3 mt-1 sm:mt-2">
             <button
               onClick={() => handleAcceptDuel(duel.duelId)}
               disabled={
                 actionLoading[`accept_${duel.duelId}`] ||
                 actionLoading[`reject_${duel.duelId}`]
               }
-              className="flex-1 btn-3d bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-bold disabled:opacity-50 border-2 border-black"
+              className="flex-1 btn-3d bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded-lg text-[10px] sm:text-xs font-bold disabled:opacity-50 border-2 border-black"
             >
               {actionLoading[`accept_${duel.duelId}`] ? "⏳" : "✅"} Accept
             </button>
@@ -305,7 +305,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
                 actionLoading[`reject_${duel.duelId}`] ||
                 actionLoading[`accept_${duel.duelId}`]
               }
-              className="flex-1 btn-3d bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-xs font-bold disabled:opacity-50 border-2 border-black"
+              className="flex-1 btn-3d bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg text-[10px] sm:text-xs font-bold disabled:opacity-50 border-2 border-black"
             >
               {actionLoading[`reject_${duel.duelId}`] ? "⏳" : "❌"} Reject
             </button>
@@ -351,26 +351,28 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
     return (
       <div
         key={duel.duelId}
-        className="bg-blue-50 border-2 border-blue-400 rounded-lg p-4 mb-3"
+        className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3 sm:p-4 mb-2 sm:mb-3"
       >
-        <div className="flex justify-between items-start mb-2">
-          <div>
-            <h5 className="font-bold text-sm">Dueling {otherUserDisplay}</h5>
-            <p className="text-gray-600" style={{ fontSize: "12px" }}>
+        <div className="flex justify-between items-start mb-1 sm:mb-2">
+          <div className="flex-1">
+            <h5 className="font-bold text-xs sm:text-sm">
+              Dueling {otherUserDisplay}
+            </h5>
+            <p className="text-gray-600 text-[10px] sm:text-xs">
               {duel.difficulty} • Problem Hidden
             </p>
             {timeRemaining > 0 && (
-              <p className="text-xs text-orange-600 font-bold">
+              <p className="text-[10px] sm:text-xs text-orange-600 font-bold">
                 ⏰ Expires in {hoursRemaining}h {minutesRemaining}m
               </p>
             )}
           </div>
-          <span className="text-xs bg-blue-200 px-2 py-1 rounded font-bold">
+          <span className="text-[10px] sm:text-xs bg-blue-200 px-1 sm:px-2 py-0.5 sm:py-1 rounded font-bold">
             ACTIVE
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+        <div className="grid grid-cols-2 gap-2 mb-2 sm:mb-3 text-[10px] sm:text-xs">
           <div className="text-center">
             <div className="font-bold">You</div>
             <div className={validUserTime ? "text-green-600" : "text-gray-400"}>
@@ -392,7 +394,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           <button
             onClick={() => handleStartDuel(duel.duelId)}
             disabled={actionLoading[`start_${duel.duelId}`]}
-            className="w-full btn-3d bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-bold disabled:opacity-50 border-2 border-black"
+            className="w-full btn-3d bg-green-500 hover:bg-green-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold disabled:opacity-50 border-2 border-black text-xs sm:text-sm"
           >
             {actionLoading[`start_${duel.duelId}`]
               ? "⏳ Starting..."
@@ -402,14 +404,14 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
 
         {/* Show Solve Now only if duelStarted is true and userTime is null */}
         {duelStarted && userTime == null && (
-          <div className="space-y-2">
+          <div className="space-y-1 sm:space-y-2">
             <button
               onClick={() => handleSolveNow(duel.problemSlug)}
-              className="w-full btn-3d bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold border-2 border-black"
+              className="w-full btn-3d bg-blue-500 hover:bg-blue-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-bold border-2 border-black text-xs sm:text-sm"
             >
               💻 Solve Now
             </button>
-            <div className="text-center text-xs text-gray-600">
+            <div className="text-center text-[10px] sm:text-xs text-gray-600">
               Click to open problem on LeetCode
             </div>
           </div>
@@ -417,10 +419,10 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
 
         {validUserTime && (
           <div className="text-center">
-            <p className="text-sm text-green-600 font-bold">
+            <p className="text-xs sm:text-sm text-green-600 font-bold">
               ✅ You submitted in {formatTime(userTime)}
             </p>
-            <p className="text-xs text-gray-600">
+            <p className="text-[10px] sm:text-xs text-gray-600">
               {validOpponentTime
                 ? "Both submitted! Check results below."
                 : "Waiting for opponent to finish..."}
@@ -449,23 +451,25 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
       return (
         <div
           key={duel.duelId}
-          className={`border-2 rounded-lg p-4 mb-3 ${won ? "bg-green-50 border-green-400" : "bg-red-50 border-red-400"}`}
+          className={`border-2 rounded-lg p-3 sm:p-4 mb-2 sm:mb-3 ${won ? "bg-green-50 border-green-400" : "bg-red-50 border-red-400"}`}
         >
-          <div className="flex justify-between items-start mb-2">
+          <div className="flex justify-between items-start mb-1 sm:mb-2">
             <div>
-              <h5 className="font-bold text-sm">vs {otherUserDisplay}</h5>
-              <p className="text-xs text-gray-600">
+              <h5 className="font-bold text-xs sm:text-sm">
+                vs {otherUserDisplay}
+              </h5>
+              <p className="text-[10px] sm:text-xs text-gray-600">
                 {duel.difficulty} • {duel.problemTitle}
               </p>
             </div>
             <span
-              className={`text-xs px-2 py-1 rounded font-bold ${won ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"}`}
+              className={`text-[10px] sm:text-xs px-1 sm:px-2 py-0.5 sm:py-1 rounded font-bold ${won ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"}`}
             >
               {won ? "WON" : "LOST"}
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+          <div className="grid grid-cols-2 gap-2 mb-2 sm:mb-3 text-[10px] sm:text-xs">
             <div className="text-center">
               <div className="font-bold">You</div>
               <div
@@ -487,14 +491,14 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           {/* Disabled COMPLETED button */}
           <button
             disabled={true}
-            className="btn-3d w-full bg-gray-300 text-gray-600 px-4 py-2 rounded font-bold border-2 border-gray-400 cursor-not-allowed opacity-75"
+            className="btn-3d w-full bg-gray-300 text-gray-600 px-3 sm:px-4 py-1.5 sm:py-2 rounded font-bold border-2 border-gray-400 cursor-not-allowed opacity-75 text-xs sm:text-sm"
           >
             ✅ COMPLETED
           </button>
 
           {/* Winner badge and XP banner only when duel.completed === true */}
           {duel.completed && won && (
-            <div className="mt-2 text-center text-xs text-orange-600 font-bold">
+            <div className="mt-1 sm:mt-2 text-center text-[10px] sm:text-xs text-orange-600 font-bold">
               +{duel.xpAwarded} XP earned!
             </div>
           )}
@@ -525,19 +529,23 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none bg-black bg-opacity-30">
         <div
-          className="bg-white border-2 border-green-300 rounded-xl p-6 shadow-lg pointer-events-auto flex flex-col items-center"
-          style={{ minWidth: 280 }}
+          className="bg-white border-2 border-green-300 rounded-xl p-4 sm:p-6 shadow-lg pointer-events-auto flex flex-col items-center mx-4"
+          style={{ minWidth: 240, maxWidth: 320 }}
         >
-          <div className="text-4xl mb-2 text-green-500">🏆</div>
-          <h2 className="text-xl font-bold text-green-700 mb-1">Victory</h2>
-          <p className="text-base text-gray-700 mb-1 text-center">
+          <div className="text-3xl sm:text-4xl mb-1 sm:mb-2 text-green-500">
+            🏆
+          </div>
+          <h2 className="text-lg sm:text-xl font-bold text-green-700 mb-1">
+            Victory
+          </h2>
+          <p className="text-sm sm:text-base text-gray-700 mb-1 text-center">
             You won the duel against{" "}
             <span className="font-semibold">{lastWinData.problemTitle}</span>!
           </p>
-          <p className="text-sm text-gray-500 mb-2">
+          <p className="text-xs sm:text-sm text-gray-500 mb-1 sm:mb-2">
             Time: {formatTime(lastWinData.time)}
           </p>
-          <div className="bg-green-100 text-green-700 px-3 py-1 rounded font-semibold text-base">
+          <div className="bg-green-100 text-green-700 px-2 sm:px-3 py-1 rounded font-semibold text-sm sm:text-base">
             +{lastWinData.xpAwarded} XP
           </div>
         </div>
@@ -563,13 +571,15 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
   if (loading) {
     return (
       <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden">
-        <div className="bg-blue-500 px-6 py-4 border-b-4 border-black">
+        <div className="bg-blue-500 px-3 sm:px-6 py-3 sm:py-4 border-b-4 border-black">
           <div className="flex items-center gap-2">
-            <span className="text-white text-lg">⚔️</span>
-            <h3 className="font-bold text-white text-lg">DUELS</h3>
+            <span className="text-white text-base sm:text-lg">⚔️</span>
+            <h3 className="font-bold text-white text-base sm:text-lg">DUELS</h3>
           </div>
         </div>
-        <div className="p-6 text-center text-gray-600">Loading duels...</div>
+        <div className="p-4 sm:p-6 text-center text-gray-600">
+          Loading duels...
+        </div>
       </div>
     )
   }
@@ -580,7 +590,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
     .slice(0, 5) // Show last 5 completed
 
   return (
-    <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden relative w-full h-full">
+    <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden relative w-full h-full flex flex-col">
       {/* Win message overlay */}
       <WinMessage />
 
@@ -590,7 +600,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           {notifications.map((notification) => (
             <div
               key={notification.id}
-              className={`mt-2 px-3 py-1 rounded border-2 border-white shadow text-xs font-bold flex items-center gap-2 pointer-events-auto
+              className={`mt-1 sm:mt-2 px-2 sm:px-3 py-1 rounded border-2 border-white shadow text-[10px] sm:text-xs font-bold flex items-center gap-1 sm:gap-2 pointer-events-auto
                 ${notification.type === "success" ? "bg-green-600 text-white" : ""}
                 ${notification.type === "error" ? "bg-red-600 text-white" : ""}
                 ${notification.type === "info" ? "bg-blue-600 text-white" : ""}
@@ -601,26 +611,28 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
           ))}
         </div>
       )}
-      <div className="bg-blue-500 px-6 py-4 border-b-4 border-black">
+      <div className="bg-blue-500 px-3 sm:px-6 py-3 sm:py-4 border-b-4 border-black flex-shrink-0">
         <div className="flex items-center gap-2">
-          <span className="text-white text-lg">⚔️</span>
-          <h3 className="font-bold text-white text-lg">DUELS</h3>
+          <span className="text-white text-base sm:text-lg">⚔️</span>
+          <h3 className="font-bold text-white text-base sm:text-lg">DUELS</h3>
         </div>
       </div>
-      <div className="p-6 overflow-y-auto max-h-[400px] md:max-h-none">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="p-3 sm:p-6 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {/* Challenge Friends */}
           <div
-            className="bg-white p-4 border-2 border-black rounded-lg shadow-md"
-            style={{ height: "260px" }}
+            className="bg-white p-3 sm:p-4 border-2 border-black rounded-lg shadow-md"
+            style={{ minHeight: "240px" }}
           >
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="font-bold text-lg">Challenge Friend</h4>
-              <span className="text-lg">🎯</span>
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <h4 className="font-bold text-base sm:text-lg">
+                Challenge Friend
+              </h4>
+              <span className="text-base sm:text-lg">🎯</span>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <select
-                className="w-full p-2 border-2 border-black rounded-lg font-medium"
+                className="w-full p-1.5 sm:p-2 border-2 border-black rounded-lg font-medium text-xs sm:text-sm"
                 value={selectedFriend}
                 onChange={(e) => setSelectedFriend(e.target.value)}
               >
@@ -639,34 +651,26 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
                 )}
               </select>
               <select
-                className="w-full p-2 border-2 border-black rounded-lg font-medium"
+                className="w-full p-1.5 sm:p-2 border-2 border-black rounded-lg font-medium text-xs sm:text-sm"
                 value={selectedDifficulty}
                 onChange={(e) => setSelectedDifficulty(e.target.value)}
               >
                 <option value="">Problem difficulty...</option>
-                <option value="Easy">
-                  Easy (100 XP + 200 bonus if you win)
-                </option>
-                <option value="Medium">
-                  Medium (300 XP + 200 bonus if you win)
-                </option>
-                <option value="Hard">
-                  Hard (500 XP + 200 bonus if you win)
-                </option>
-                <option value="Random">
-                  Random (? XP + 200 bonus if you win)
-                </option>
+                <option value="Easy">Easy (100 XP + 200 bonus)</option>
+                <option value="Medium">Medium (300 XP + 200 bonus)</option>
+                <option value="Hard">Hard (500 XP + 200 bonus)</option>
+                <option value="Random">Random (? XP + 200 bonus)</option>
               </select>
             </div>
             {error && (
-              <div className="mt-2 p-2 bg-red-100 border border-red-300 rounded text-red-700 text-sm">
+              <div className="mt-1 sm:mt-2 p-1 sm:p-2 bg-red-100 border border-red-300 rounded text-red-700 text-[10px] sm:text-sm">
                 {error}
               </div>
             )}
             <button
               onClick={handleSendChallenge}
               disabled={actionLoading.createDuel}
-              className="w-full mt-3 btn-3d bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg border-2 border-black font-bold disabled:opacity-50"
+              className="w-full mt-2 sm:mt-3 btn-3d bg-blue-500 hover:bg-blue-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border-2 border-black font-bold disabled:opacity-50 text-xs sm:text-sm"
             >
               {actionLoading.createDuel ? "⏳ Sending..." : "Send Challenge"}
             </button>
@@ -674,17 +678,17 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
 
           {/* Active Duels & History */}
           <div
-            className="bg-white p-4 border-2 border-black rounded-lg shadow-md"
-            style={{ height: "260px" }}
+            className="bg-white p-3 sm:p-4 border-2 border-black rounded-lg shadow-md"
+            style={{ minHeight: "240px" }}
           >
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="font-bold text-lg">Your Duels</h4>
-              <span className="text-lg">📊</span>
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <h4 className="font-bold text-base sm:text-lg">Your Duels</h4>
+              <span className="text-base sm:text-lg">📊</span>
             </div>
 
             <div
               className="overflow-y-auto custom-scrollbar"
-              style={{ height: "190px" }}
+              style={{ height: "180px" }}
             >
               {/* Show active and pending duels first */}
               {filteredDuels
@@ -696,7 +700,7 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
               {/* Show completed duels if any */}
               {completedDuels.length > 0 && (
                 <>
-                  <div className="text-xs font-bold text-gray-600 mt-3 mb-2 border-b border-gray-300 pb-1">
+                  <div className="text-[10px] sm:text-xs font-bold text-gray-600 mt-2 sm:mt-3 mb-1 sm:mb-2 border-b border-gray-300 pb-1">
                     RECENT COMPLETED DUELS
                   </div>
                   {completedDuels.map((duel, idx) => {
@@ -712,21 +716,25 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
                     return (
                       <div
                         key={duel.duelId || idx}
-                        className={`mb-2 p-2 rounded border-2 ${
+                        className={`mb-1 sm:mb-2 p-1.5 sm:p-2 rounded border-2 ${
                           isWinner
                             ? "bg-green-100 border-green-400"
                             : "bg-red-100 border-red-400"
                         }`}
                       >
-                        <div className="flex justify-between items-center text-xs">
+                        <div className="flex justify-between items-center text-[10px] sm:text-xs">
                           <div>
                             <div className="font-bold">
                               {isWinner ? "🏆 WIN" : "❌ LOSS"}
                             </div>
-                            <div className="ml-2">vs {otherUserDisplay}</div>
+                            <div className="ml-1 sm:ml-2">
+                              vs {otherUserDisplay}
+                            </div>
                           </div>
                           <div className="text-right">
-                            <div className="font-bold">{duel.problemTitle}</div>
+                            <div className="font-bold text-[9px] sm:text-[11px]">
+                              {duel.problemTitle}
+                            </div>
                             <div className="text-gray-600">
                               {duel.difficulty}
                             </div>
@@ -744,10 +752,10 @@ const DuelsSection = ({ leaderboard = [], userData }) => {
               )}
 
               {filteredDuels.length === 0 && (
-                <div className="text-center text-gray-500 py-4">
-                  <div className="text-2xl mb-2">⚔️</div>
-                  <div className="text-sm">No duels yet!</div>
-                  <div className="text-xs">
+                <div className="text-center text-gray-500 py-3 sm:py-4">
+                  <div className="text-xl sm:text-2xl mb-1 sm:mb-2">⚔️</div>
+                  <div className="text-xs sm:text-sm">No duels yet!</div>
+                  <div className="text-[10px] sm:text-xs">
                     Challenge a friend to get started
                   </div>
                 </div>
