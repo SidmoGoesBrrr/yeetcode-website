@@ -311,6 +311,8 @@ export default function Home() {
               Transform solo grinding into friendly competition with your dev
               friends.
             </span>
+            This is a cool preview page, where we can show changes before we add
+            them to the main app.
           </p>
 
           <div className="flex flex-col items-center gap-6 mb-10">

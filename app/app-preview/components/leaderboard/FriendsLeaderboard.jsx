@@ -175,16 +175,20 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
 
   return (
     <div className="panel-3d bg-yellow-100 border-4 border-black rounded-xl overflow-hidden flex flex-col w-full h-full">
-      <div className="bg-blue-500 px-6 py-4 border-b-4 border-black flex-shrink-0">
+      <div className="bg-blue-500 px-3 sm:px-6 py-3 sm:py-4 border-b-4 border-black flex-shrink-0">
         {/* Header: Title + Tabs + Notifications */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-4">
-            <span className="text-white text-lg">🏆</span>
-            <h3 className="font-bold text-white text-lg">LEADERBOARD</h3>
-            {/* Tabs (inline with title) */}
-            <div className="flex gap-2 ml-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-white text-base sm:text-lg">🏆</span>
+              <h3 className="font-bold text-white text-base sm:text-lg">
+                LEADERBOARD
+              </h3>
+            </div>
+            {/* Tabs */}
+            <div className="flex gap-2">
               <button
-                className={`btn-3d px-3 py-1 rounded-lg font-bold border-2 border-black focus:outline-none transition-colors text-sm ${
+                className={`btn-3d px-2 sm:px-3 py-1 rounded-lg font-bold border-2 border-black focus:outline-none transition-colors text-xs sm:text-sm ${
                   activeTab === "friends"
                     ? "bg-yellow-300 text-black"
                     : "bg-white text-black hover:bg-yellow-100"
@@ -194,7 +198,7 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
                 Friends
               </button>
               <button
-                className={`btn-3d px-3 py-1 rounded-lg font-bold border-2 border-black focus:outline-none transition-colors text-sm ${
+                className={`btn-3d px-2 sm:px-3 py-1 rounded-lg font-bold border-2 border-black focus:outline-none transition-colors text-xs sm:text-sm ${
                   activeTab === "university"
                     ? "bg-yellow-300 text-black"
                     : "bg-white text-black hover:bg-yellow-100"
@@ -205,8 +209,8 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
               </button>
             </div>
           </div>
-          {/* Notification Bar (inline) */}
-          <div className="relative min-h-[24px] flex items-center">
+          {/* Notification Bar */}
+          <div className="relative min-h-[24px] flex items-center overflow-x-auto scrollbar-hide">
             <AnimatePresence mode="popLayout">
               {filteredNotifications.map((notification, idx) => (
                 <motion.div
@@ -215,7 +219,7 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -20, scale: 0.8 }}
                   transition={{ duration: 0.3 }}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-lg border-2 border-white text-white font-bold ml-2 shadow-lg text-sm ${
+                  className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 rounded-lg border-2 border-white text-white font-bold ml-2 shadow-lg text-xs sm:text-sm whitespace-nowrap ${
                     notification.type === "overtake"
                       ? "bg-orange-400"
                       : notification.type === "joined"
@@ -240,30 +244,32 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
       <div className="flex-1 overflow-hidden">
         {activeTab === "university" ? (
           <div className="flex-1">
-            <div className="overflow-x-auto w-full max-w-full h-full max-h-[260px]">
+            <div className="overflow-x-auto w-full max-w-full h-full max-h-[260px] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
               <table className="w-full max-w-full table-fixed">
                 <thead className="bg-yellow-100 sticky top-0 z-10">
-                  <tr className="border-b-2 border-black">
-                    <th className="font-bold text-left px-4 py-2 w-16">RANK</th>
-                    <th className="font-bold text-left px-4 py-2 w-40">
+                  <tr className="border-b-2 border-black text-xs sm:text-sm">
+                    <th className="font-bold text-left px-2 sm:px-4 py-2 w-12 sm:w-16">
+                      RANK
+                    </th>
+                    <th className="font-bold text-left px-2 sm:px-4 py-2 w-32 sm:w-40">
                       UNIVERSITY
                     </th>
-                    <th className="font-bold text-center px-4 py-2 w-20">
+                    <th className="font-bold text-center px-1 sm:px-4 py-2 w-16 sm:w-20 hidden sm:table-cell">
                       STUDENTS
                     </th>
-                    <th className="font-bold text-center px-4 py-2 w-16">
+                    <th className="font-bold text-center px-1 sm:px-4 py-2 w-12 sm:w-16 hidden md:table-cell">
                       EASY
                     </th>
-                    <th className="font-bold text-center px-4 py-2 w-16">
+                    <th className="font-bold text-center px-1 sm:px-4 py-2 w-12 sm:w-16 hidden md:table-cell">
                       MED
                     </th>
-                    <th className="font-bold text-center px-4 py-2 w-16">
+                    <th className="font-bold text-center px-1 sm:px-4 py-2 w-12 sm:w-16 hidden md:table-cell">
                       HARD
                     </th>
-                    <th className="font-bold text-center px-4 py-2 w-20">
+                    <th className="font-bold text-center px-2 sm:px-4 py-2 w-16 sm:w-20">
                       TOTAL
                     </th>
-                    <th className="font-bold text-center px-4 py-2 w-24">
+                    <th className="font-bold text-center px-2 sm:px-4 py-2 w-20 sm:w-24">
                       TOTAL XP
                     </th>
                   </tr>
@@ -296,35 +302,37 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
                             transition={{ duration: 0.2 }}
                             className={`border-b border-gray-200 ${bgColor}`}
                           >
-                            <td className={`px-4 py-3 w-16 font-bold`}>
+                            <td
+                              className={`px-2 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 font-bold text-xs sm:text-base`}
+                            >
                               #{index + 1}
                             </td>
-                            <td className="px-4 py-3 w-40">
+                            <td className="px-2 sm:px-4 py-2 sm:py-3 w-32 sm:w-40">
                               <div>
-                                <div className="font-semibold">
+                                <div className="font-semibold text-xs sm:text-base">
                                   {university.name}
                                 </div>
-                                <div className="text-xs text-gray-500">
+                                <div className="text-[10px] sm:text-xs text-gray-500">
                                   Top: {university.topPlayer}
                                 </div>
                               </div>
                             </td>
-                            <td className="text-center px-4 py-3 w-20">
+                            <td className="text-center px-1 sm:px-4 py-2 sm:py-3 w-16 sm:w-20 text-xs sm:text-base hidden sm:table-cell">
                               {university.students}
                             </td>
-                            <td className="text-center px-4 py-3 w-16">
+                            <td className="text-center px-1 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 text-xs sm:text-base hidden md:table-cell">
                               {university.easy.toLocaleString()}
                             </td>
-                            <td className="text-center px-4 py-3 w-16">
+                            <td className="text-center px-1 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 text-xs sm:text-base hidden md:table-cell">
                               {university.medium.toLocaleString()}
                             </td>
-                            <td className="text-center px-4 py-3 w-16">
+                            <td className="text-center px-1 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 text-xs sm:text-base hidden md:table-cell">
                               {university.hard.toLocaleString()}
                             </td>
-                            <td className="text-center px-4 py-3 w-20 font-bold text-blue-600">
+                            <td className="text-center px-2 sm:px-4 py-2 sm:py-3 w-16 sm:w-20 font-bold text-blue-600 text-xs sm:text-base">
                               {university.total.toLocaleString()}
                             </td>
-                            <td className="text-center px-4 py-3 w-24 font-bold text-purple-600">
+                            <td className="text-center px-2 sm:px-4 py-2 sm:py-3 w-20 sm:w-24 font-bold text-purple-600 text-xs sm:text-base">
                               {(university.totalXP / 1000).toFixed(1)}K
                             </td>
                           </motion.tr>
@@ -340,19 +348,31 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
             No competitors yet! Invite friends to join.
           </div>
         ) : (
-          <div className="overflow-x-auto w-full max-w-full h-full max-h-[260px]">
+          <div className="overflow-x-auto w-full max-w-full h-full max-h-[260px] scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
             <table className="w-full max-w-full table-fixed">
               <thead className="bg-yellow-100 sticky top-0 z-10">
-                <tr className="border-b-2 border-black">
-                  <th className="font-bold text-left px-4 py-2 w-16">RANK</th>
-                  <th className="font-bold text-left px-4 py-2 w-32">PLAYER</th>
-                  <th className="font-bold text-center px-4 py-2 w-16">EASY</th>
-                  <th className="font-bold text-center px-4 py-2 w-16">MED</th>
-                  <th className="font-bold text-center px-4 py-2 w-16">HARD</th>
-                  <th className="font-bold text-center px-4 py-2 w-20">
+                <tr className="border-b-2 border-black text-xs sm:text-sm">
+                  <th className="font-bold text-left px-2 sm:px-4 py-2 w-12 sm:w-16">
+                    RANK
+                  </th>
+                  <th className="font-bold text-left px-2 sm:px-4 py-2 w-24 sm:w-32">
+                    PLAYER
+                  </th>
+                  <th className="font-bold text-center px-1 sm:px-4 py-2 w-12 sm:w-16 hidden sm:table-cell">
+                    EASY
+                  </th>
+                  <th className="font-bold text-center px-1 sm:px-4 py-2 w-12 sm:w-16 hidden sm:table-cell">
+                    MED
+                  </th>
+                  <th className="font-bold text-center px-1 sm:px-4 py-2 w-12 sm:w-16 hidden sm:table-cell">
+                    HARD
+                  </th>
+                  <th className="font-bold text-center px-2 sm:px-4 py-2 w-16 sm:w-20">
                     TOTAL
                   </th>
-                  <th className="font-bold text-center px-4 py-2 w-24">XP</th>
+                  <th className="font-bold text-center px-2 sm:px-4 py-2 w-20 sm:w-24">
+                    XP
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -391,22 +411,24 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
                           transition={{ duration: 0.2 }}
                           className={`border-b border-gray-200 ${bgColor}`}
                         >
-                          <td className={`px-4 py-3 w-16 ${rankStyle}`}>
+                          <td
+                            className={`px-2 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 text-xs sm:text-base ${rankStyle}`}
+                          >
                             #{index + 1}
                           </td>
-                          <td className="px-4 py-3 w-32">
+                          <td className="px-2 sm:px-4 py-2 sm:py-3 w-24 sm:w-32">
                             <div className="flex items-center gap-2">
                               <div
-                                className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border border-black ${isCurrentUser ? "bg-blue-200 text-blue-800" : "bg-gray-300"}`}
+                                className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold border border-black ${isCurrentUser ? "bg-blue-200 text-blue-800" : "bg-gray-300"}`}
                               >
                                 {user.name.substring(0, 2).toUpperCase()}
                               </div>
                               <span
-                                className={
+                                className={`text-xs sm:text-sm ${
                                   isCurrentUser
                                     ? "font-semibold text-blue-700"
                                     : ""
-                                }
+                                }`}
                                 onMouseEnter={() =>
                                   setHoveredUser(user.username)
                                 }
@@ -432,27 +454,27 @@ const FriendsLeaderboard = ({ leaderboard, userData, notifications = [] }) => {
                             </div>
                           </td>
                           <td
-                            className={`text-center px-4 py-3 w-16 ${textStyle}`}
+                            className={`text-center px-1 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 text-xs sm:text-base hidden sm:table-cell ${textStyle}`}
                           >
                             {user.easy}
                           </td>
                           <td
-                            className={`text-center px-4 py-3 w-16 ${textStyle}`}
+                            className={`text-center px-1 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 text-xs sm:text-base hidden sm:table-cell ${textStyle}`}
                           >
                             {user.medium}
                           </td>
                           <td
-                            className={`text-center px-4 py-3 w-16 ${textStyle}`}
+                            className={`text-center px-1 sm:px-4 py-2 sm:py-3 w-12 sm:w-16 text-xs sm:text-base hidden sm:table-cell ${textStyle}`}
                           >
                             {user.hard}
                           </td>
                           <td
-                            className={`text-center px-4 py-3 w-20 font-bold ${isCurrentUser ? "text-blue-700" : "text-blue-600"}`}
+                            className={`text-center px-2 sm:px-4 py-2 sm:py-3 w-16 sm:w-20 font-bold text-xs sm:text-base ${isCurrentUser ? "text-blue-700" : "text-blue-600"}`}
                           >
                             {total}
                           </td>
                           <td
-                            className={`text-center px-4 py-3 w-24 font-bold ${isCurrentUser ? "text-purple-700" : "text-purple-600"}`}
+                            className={`text-center px-2 sm:px-4 py-2 sm:py-3 w-20 sm:w-24 font-bold text-xs sm:text-base ${isCurrentUser ? "text-purple-700" : "text-purple-600"}`}
                           >
                             {userXP.toLocaleString()}
                           </td>

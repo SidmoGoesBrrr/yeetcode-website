@@ -95,6 +95,48 @@
 @layer base {
   body {
     @apply text-foreground font-base bg-background font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optimize animations globally */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Custom scrollbar styles */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
   }
 
   h1,
@@ -139,29 +181,31 @@
     position: relative;
   }
   .slide-in-right {
-    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: slideInRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform, opacity;
   }
   .slide-in-left {
-    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: slideInLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform, opacity;
   }
   @keyframes slideInRight {
     from {
       opacity: 0;
-      transform: translateX(100px) scale(0.95);
+      transform: translateX(60px);
     }
     to {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: translateX(0);
     }
   }
   @keyframes slideInLeft {
     from {
       opacity: 0;
-      transform: translateX(-100px) scale(0.95);
+      transform: translateX(-60px);
     }
     to {
       opacity: 1;
-      transform: translateX(0) scale(1);
+      transform: translateX(0);
     }
   }
 
@@ -196,23 +240,22 @@
   .btn-3d {
     position: relative;
     box-shadow: 6px 6px 0 #000;
-    transition: all 0.15s ease-in-out;
-    transform: translate(0, 0);
+    transition:
+      transform 0.1s ease-out,
+      box-shadow 0.1s ease-out;
+    transform: translate3d(0, 0, 0);
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
   }
 
   .btn-3d:active {
-    transform: translate(6px, 6px);
+    transform: translate3d(6px, 6px, 0);
     box-shadow: none;
   }
 
-  .btn-3d:hover {
+  .btn-3d:hover:not(:active) {
     box-shadow: 2px 2px 0 #000;
-    transform: translate(4px, 4px);
-  }
-
-  .btn-3d:active:hover {
-    transform: translate(6px, 6px);
-    box-shadow: none;
+    transform: translate3d(4px, 4px, 0);
   }
 
   /* Additional shadow variations */
@@ -240,7 +283,8 @@
 
   /* Button press animation */
   .btn-press {
-    transition: all 0.1s ease-in-out;
+    transition: transform 0.08s ease-out;
+    will-change: transform;
   }
   .btn-press:active {
     transform: scale(0.98);
@@ -249,11 +293,15 @@
   /* Panel 3D effects */
   .panel-3d {
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease-in-out;
+    transition:
+      transform 0.15s ease-out,
+      box-shadow 0.15s ease-out;
+    transform: translate3d(0, 0, 0);
+    will-change: transform, box-shadow;
   }
 
   .panel-3d:hover {
-    transform: translate(-2px, -2px);
+    transform: translate3d(-2px, -2px, 0);
     box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
   }
 
